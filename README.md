@@ -1,12 +1,12 @@
 <a href="https://novela.tinia.vercel.app/" target="_blank">
-<img src="https://github.com/tinialabs/next-theme-novela-tw/blob/main/.github/static/nextjs-theme-novela-hero-emotion.jpg?raw=true" alt="gatsby-novela-theme hero image" />
+<img src="https://github.com/tinialabs/next-theme-novela-tw/blob/main/.github/static/nextjs-theme-novela-hero.jpg?raw=true" alt="gatsby-novela-theme hero image" />
 </a>
 
 <br/>
 
-# Novela — A blog theme for Next.js
+# Novela — A blog theme for Next.js and Tailwind
 
-The beautiful blog theme from Narative adapted by Tinia Labs for Next.js with blazing fast performance.
+The beautiful blog theme from Narative adapted by Tinia Labs for Next.js and Tailwind CSS with blazing fast performance.
 
 With minimal styling and maximum features — including multiple homepage layouts, built-in social sharing and dark mode — Novela makes it easy to start publishing beautiful articles and stories with Next.js.
 

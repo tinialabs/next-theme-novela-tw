@@ -6,9 +6,6 @@ import Bio from '@/theme/components/bio'
 import Icons from '@/theme/icons'
 import mediaqueries from '@/theme/styles/media'
 import type { HeroSiteProps, IAuthor } from '@/theme/types'
-import tw from 'xwind'
-// import { css } from '@emotion/react'
-
 import { GridLayoutContext } from './articles-list-context'
 
 const ArticlesHero: React.FC<{
@@ -102,10 +99,9 @@ const HeadingContainer = styled.div`
     width: 100%;
   `}
 `
-
 const HeroHeading = (props) => (
   <h1
-    className={tw`font-semibold text-3xl md:text-4xl lg:text-5xl not-italic`}
+    tw={`font-semibold text-3xl md:text-4xl lg:text-5xl ${'not-italic'}`}
     css={{ lineHeight: '1.15' }}
     {...props}
   />

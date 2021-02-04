@@ -14,7 +14,7 @@ Novela is built by the team at [Narative](https://www.narative.co), updated by [
 
 Special thanks to [@jpvalery](https://github.com/jpvalery) for helping maintain the original Gatsby version of Novela.
 
-See [tinialabs/next-starter-novela-tw](https://github.com/tinialabs/next-starter-novela-tw) for a complete starter kit that uses this theme.
+See [tinialabs/next-novela-tailwind](https://github.com/tinialabs/next-novela-tailwind) for a complete starter kit that uses this theme.
 
 <div>
 <a href="https://novela.tinia.vercel.app/" target="_blank">
@@ -38,7 +38,7 @@ Features specific to Next.js over others Next.js examples
 
 ## Dependencies
 
-See [tinialabs/next-starter-novela-tw](https://github.com/tinialabs/next-starter-novela-tw) for a complete starter kit that uses this theme.
+See [tinialabs/next-novela-tailwind](https://github.com/tinialabs/next-novela-tailwind) for a complete starter kit that uses this theme.
 
 See [tinialabs/next-lib-content](https://github.com/tinialabs/next-lib-content) for logic that generates the blog articles from markdown and yaml files on disk. 
 
@@ -48,7 +48,7 @@ Two Next.js plugins [tinialabs/next-favicon-loader](https://github.com/tinialabs
 
 - [Why Novela?](#why-use-novela)
 
-- [Getting Started](#getting-started-with-next-starter-novela-tw)
+- [Getting Started](#getting-started-with-next-novela-tailwind)
 
   - With Next.js Starter Novela
 
@@ -98,13 +98,13 @@ This guide will take you through setting up Novela with Next.js Starter Novela.
 ##### With `create-next-app`:
 
 ```sh
-npx create-next-app -e https://github.com/tinialabs/next-starter-novela-tw
+npx create-next-app -e https://github.com/tinialabs/next-novela-tailwind
 ```
 
 ##### With `git clone`:
 
 ```sh
-git clone git@github.com:tinialabs/next-starter-novela-tw.git novela-site
+git clone git@github.com:tinialabs/next-novela-tailwind.git novela-site
 
 cd novela-site
 
@@ -133,7 +133,7 @@ To learn more about adding Authors, Posts, and Site Metadata see:
 
 This guide will take you through adding Novela to a new project. You do not require any Next.js starters or similar, but you can add Novela to an existing Next.js project.
 
-You can also view the completed [example repository](https://github.com/tinialabs/next-starter-novela-tw).
+You can also view the completed [example repository](https://github.com/tinialabs/next-novela-tailwind).
 
 ### Step 1: Installation
 
@@ -199,11 +199,8 @@ module.exports = withPlugins(
     require('next-image-meta-loader'),
   ],
   {
-    webpack: (config, { defaultLoaders }) => {
-      defaultLoaders.babel.options.plugins = [
-        require.resolve('@emotion/babel-plugin')
-      ]
-
+    webpack: (config) => {
+      // custom webpack config here
       return config
     }
   }
@@ -325,7 +322,7 @@ googleAnalytics:
 
 Once all steps have been completed you can run your site. In the root of your project run `yarn dev`.
 
-If you ran into problems you can reference the [example repository](https://github.com/tinialabs/next-starter-novela-tw) or create an issue.
+If you ran into problems you can reference the [example repository](https://github.com/tinialabs/next-novela-tailwind) or create an issue.
 
 <br />
 
@@ -363,7 +360,7 @@ By default Author pages are  enabled. They can be disabled through the site opti
 
 ### Changing styles
 
-Novela allows you to change the default theme styling by updating the [theme-ui](https://theme-ui.com/) values. If you're familiar with Styled Components or Emotion it's the same as adapting the theme you pass to `ThemeProvider`.
+Novela allows you to change the default theme styling by updating the `theme-tw` which is based on [theme-ur](https://theme-ui.com/) specification. If you're familiar with Styled Components or Emotion it's the same as adapting the theme you pass to `ThemeProvider`.
 
 ### Using images
 
@@ -451,12 +448,12 @@ It is recommended to use the Default options, but if your project requires somet
 | sources.local          |      true       |                                                Enable local file system data source                                                 |
 | sources.contentful     |      false      |                                                    Enable Contentful data source                                                    |
 
-[View Theme option example](https://github.com/tinialabs/next-starter-novela-tw/blob/master/next-config.js#L36)
+[View Theme option example](https://github.com/tinialabs/next-novela-tailwind/blob/master/next-config.js#L36)
 
 
 ## Author
 
-[View Author example](https://github.com/tinialabs/next-starter-novela-tw/blob/master/content/authors/authors.yml)
+[View Author example](https://github.com/tinialabs/next-novela-tailwind/blob/master/content/authors/authors.yml)
 
 | Key      | Required |  Type   |                                                                 Description                                                                 |
 | -------- | :------: | :----- | :---------------------------------------------------------------------------------------------------------------------------------------- |
@@ -498,7 +495,7 @@ It is recommended to use the Default options, but if your project requires somet
 | subscription | optional |   String   |          If mailchimp is enabled disable the subscription box on an individual Post           |
 | secret       | optional |  Boolean   |           If secret the Post will not appear in paginated lists. Defaults to false.           |
 
-[View Post example](https://github.com/tinialabs/next-starter-novela-tw/blob/master/content/posts/2019-04-31-understanding-the-gatsby-lifecycle/index.mdx)
+[View Post example](https://github.com/tinialabs/next-novela-tailwind/blob/master/content/posts/2019-04-31-understanding-the-gatsby-lifecycle/index.mdx)
 
 ```yml
 # novela-site/content/posts/2020-01-01/index.mdx

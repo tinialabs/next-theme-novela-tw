@@ -1,7 +1,7 @@
 /** CONTAINS SERVER-SIDE ONLY CODE  */
 import baseRenderToString from 'next-mdx-remote/render-to-string'
-import { ThemeProvider } from 'theme-ui'
-import theme from '@/theme/theme-config'
+import { ThemeProvider } from '@/theme/hooks/use-theme'
+import theme from '@/theme/theme-tw'
 import mdxOptions from '@/config/mdx-plugins'
 import { mdxComponents, mdxRender, MdxSerializedSource } from './mdx-components'
 

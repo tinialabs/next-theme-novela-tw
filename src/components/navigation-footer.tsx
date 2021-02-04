@@ -1,6 +1,7 @@
 import type * as React from 'react'
-import styled from '@emotion/styled'
-import mediaqueries from '@/theme/styles/media'
+import { styled } from '@linaria/react'
+import { cx } from '@linaria/core'
+import { mediaqueries } from '@/theme/theme-tw'
 import Section from '@/theme/components/section'
 import SocialLinks from '@/theme/components/social-links'
 import { BlogSiteProps, SEOSiteProps } from '@/theme/types'
@@ -13,7 +14,7 @@ const NavigationFooter: React.FC<{
   return (
     <>
       <FooterGradient />
-      <Section narrow>
+      <Section className={cx('narrow')}>
         <HoritzontalRule />
         <FooterContainer>
           <FooterText>
@@ -36,40 +37,40 @@ const FooterContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   padding-bottom: 80px;
-  color: ${(p) => p.theme.colors.grey};
+  color: var(--color-grey);
 
-  ${mediaqueries.tablet`
+  ${mediaqueries.tablet} {
     flex-direction: column;
     padding-bottom: 100px;
-  `}
+  }
 
-  ${mediaqueries.phablet`
+  ${mediaqueries.phablet} {
     padding-bottom: 50px;
-  `}
+  }
 `
 
 const HoritzontalRule = styled.div`
   position: relative;
   margin: 140px auto 50px;
-  border-bottom: 1px solid ${(p) => p.theme.colors.horizontalRule};
+  border-bottom: 1px solid var(--color-horizontal-rule);
 
-  ${mediaqueries.tablet`
+  ${mediaqueries.tablet} {
     margin: 60px auto;
-  `}
+  }
 
-  ${mediaqueries.phablet`
+  ${mediaqueries.phablet} {
     display: none;
-  `}
+  }
 `
 
 const FooterText = styled.div`
-  ${mediaqueries.tablet`
+  ${mediaqueries.tablet} {
     margin-bottom: 80px;
-  `}
+  }
 
-  ${mediaqueries.phablet`
+  ${mediaqueries.phablet} {
     margin: 120px auto 100px;
-  `}
+  }
 `
 
 const FooterGradient = styled.div`
@@ -80,6 +81,6 @@ const FooterGradient = styled.div`
   height: 590px;
   z-index: 0;
   pointer-events: none;
-  background: ${(p) => p.theme.colors.gradient};
-  transition: ${(p) => p.theme.colorModeTransition};
+  background: var(--color-gradient);
+  transition: var(--transition-color-mode);
 `

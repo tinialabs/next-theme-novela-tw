@@ -1,5 +1,5 @@
-import styled from '@emotion/styled'
-import mediaqueries from '@/theme/styles/media'
+import { styled } from '@linaria/react'
+import { mediaqueries } from '@/theme/theme-tw'
 import type { Icon } from '@/theme/types'
 import LogoDesktop from '@/content/theme/logo.inline.svg'
 import LogoMobile from '@/content/theme/logo.mobile.inline.svg'
@@ -20,13 +20,13 @@ const LogoContainer = styled.div`
     display: none;
   }
 
-  ${mediaqueries.tablet`
+  ${mediaqueries.tablet} {
     .Logo__Desktop {
       display: none;
     }
-    
-    .Logo__Mobile{
+
+    .Logo__Mobile {
       display: block;
     }
-  `}
+  }
 `

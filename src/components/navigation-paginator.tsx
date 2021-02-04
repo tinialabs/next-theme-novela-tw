@@ -1,9 +1,8 @@
 /* eslint-disable @typescript-eslint/typedef */
 import type * as React from 'react'
-import styled from '@emotion/styled'
-import { css } from '@emotion/react'
+import { styled } from '@linaria/react'
 import { Helmet } from 'react-helmet'
-import mediaqueries from '@/theme/styles/media'
+import { mediaqueries } from '@/theme/theme-tw'
 import { range } from '@/theme/utils'
 import type { IPaginator } from '@/theme/types'
 import Link from '@/theme/components/link'
@@ -142,9 +141,9 @@ const Paginator: React.FC<IPaginator & { maxPages?: number }> = ({
 
 export default Paginator
 
-const paginationItemMixin = (p) => css`
+const paginationItemMixin = `
   line-height: 1;
-  color: ${p.theme.colors.primary};
+  color: var(--color-primary);
   padding: 0;
   width: 4.25rem;
   height: 4.25rem;
@@ -153,7 +152,7 @@ const paginationItemMixin = (p) => css`
   justify-content: center;
   font-variant-numeric: tabular-nums;
 
-  ${mediaqueries.desktop_up`
+  ${mediaqueries.desktop_up} {
     display: block;
     width: auto;
     height: auto;
@@ -166,15 +165,14 @@ const paginationItemMixin = (p) => css`
     &:last-child {
       padding-right: 0;
     }
-  `}
+  }
 `
 
 const PageButton = styled(Link)`
   font-weight: 600;
   font-size: 18px;
   text-decoration: none;
-  color: ${(p) => p.theme.colors.primary};
-  ${paginationItemMixin}
+  color: var(--color-primary);
 
   &:hover,
   &:focus {
@@ -187,7 +185,7 @@ const PageNumberBUtton = styled(Link)`
   font-weight: 400;
   font-size: 18px;
   text-decoration: none;
-  color: ${(p) => p.theme.colors.primary};
+  color: var(--color-primary);
   ${paginationItemMixin}
 
   &:hover,
@@ -208,16 +206,16 @@ const Spacer = styled.span`
 const MobileReference = styled.span`
   font-weight: 400;
   ${paginationItemMixin}
-  color: ${(p) => p.theme.colors.primary};
+  color: var(--color-primary);
 
   em {
     font-style: normal;
-    color: ${(p) => p.theme.colors.primary};
+    color: var(--color-primary);
   }
 
-  ${mediaqueries.desktop_up`
+  ${mediaqueries.desktop_up} {
     display: none;
-  `}
+  }
 `
 
 const Frame = styled.nav`
@@ -227,12 +225,15 @@ const Frame = styled.nav`
   justify-content: space-between;
   align-items: center;
 
-  ${mediaqueries.tablet`
-    .Paginator__pageLink, ${Spacer} { display: none; }
+  ${mediaqueries.tablet} {
+    .Paginator__pageLink,
+    ${Spacer} {
+      display: none;
+    }
     left: -15px;
-  `}
+  }
 
-  ${mediaqueries.desktop_up`
+  ${mediaqueries.desktop_up} {
     justify-content: flex-start;
-  `}
+  }
 `

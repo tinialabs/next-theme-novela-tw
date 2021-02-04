@@ -1,9 +1,9 @@
 import type * as React from 'react'
-import styled from '@emotion/styled'
-import { css } from '@emotion/react'
+import { styled } from '@linaria/react'
+import { cx } from '@linaria/core'
 import Link from '@/theme/components/link'
 import Image from '@/theme/components/image'
-import mediaqueries from '@/theme/styles/media'
+import { mediaqueries } from '@/theme/theme-tw'
 import type { IArticle } from '@/theme/types'
 import formatDate from 'date-fns/format'
 
@@ -27,7 +27,7 @@ const ArticlesNext: React.FC<ArticlesNextProps> = ({ articles }) => {
   if (!articles) return null
   const numberOfArticles = articles.length
   return (
-    <Grid numberOfArticles={numberOfArticles}>
+    <Grid className={cx(numberOfArticles === 1 && 'soloArticle')}>
       <GridItem article={articles[0]} />
       <GridItem article={articles[1]} narrow />
     </Grid>
@@ -48,9 +48,9 @@ const GridItem: React.FC<GridItemProps> = ({ article, narrow }) => {
 
   return (
     <ArticleLink
+      className={cx(narrow && 'narrow')}
       to={article.slug}
       data-a11y="false"
-      narrow={narrow ? 'true' : 'false'}
     >
       <Item>
         <ImageContainer>
@@ -59,7 +59,9 @@ const GridItem: React.FC<GridItemProps> = ({ article, narrow }) => {
         <Title dark hasOverflow={hasOverflow}>
           {article.title}
         </Title>
-        <Excerpt hasOverflow={hasOverflow}>{article.excerpt}</Excerpt>
+        <Excerpt className={cx(hasOverflow && 'hide')}>
+          {article.excerpt}
+        </Excerpt>
         <MetaData>
           {formatDate(new Date(article.date), 'MMMM do, yyyy')} ·{' '}
           {article.timeToRead} min read
@@ -69,10 +71,7 @@ const GridItem: React.FC<GridItemProps> = ({ article, narrow }) => {
   )
 }
 
-const wide = '1fr'
-const narrow = '457px'
-
-const limitToTwoLines = css`
+const limitToTwoLines = `
   text-overflow: ellipsis;
   overflow-wrap: normal;
   -webkit-line-clamp: 2;
@@ -81,37 +80,31 @@ const limitToTwoLines = css`
   white-space: normal;
   overflow: hidden;
 
-  ${mediaqueries.phablet`
+  ${mediaqueries.phablet} {
     -webkit-line-clamp: 3;
-  `}
+  }
 `
-const Grid = styled.div<{ numberOfArticles: number }>`
+const Grid = styled.div`
   position: relative;
   display: grid;
-  ${(p) => {
-    if (p.numberOfArticles === 1) {
-      return `
-      grid-template-columns: 1fr;
-      grid-template-rows: 1
-    `
-    } else {
-      return `
-      grid-template-columns: ${wide} ${narrow};
-      grid-template-rows: 2;
-      `
-    }
-  }}
+  grid-template-columns: 1fr 457px;
+  grid-template-rows: 2;
+  max-width: 100%;
+  &.soloArticle {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1;
+    max-width: 680px;
+  }
   column-gap: 30px;
   margin: 0 auto;
-  max-width: ${(p) => (p.numberOfArticles === 1 ? '680px' : '100%')};
 
-  ${mediaqueries.desktop`
+  ${mediaqueries.desktop} {
     grid-template-columns: 1fr 1fr;
-  `}
+  }
 
-  ${mediaqueries.tablet`
+  ${mediaqueries.tablet} {
     grid-template-columns: 1fr;
-  `}
+  }
 `
 
 const ImageContainer = styled.div<{ narrow?: boolean }>`
@@ -127,19 +120,19 @@ const ImageContainer = styled.div<{ narrow?: boolean }>`
     height: 100%;
   }
 
-  ${mediaqueries.tablet`
+  ${mediaqueries.tablet} {
     height: 220px;
     margin-bottom: 35px;
-  `}
+  }
 
-  ${mediaqueries.phablet`
+  ${mediaqueries.phablet} {
     height: 200px;
     margin-bottom: 0;
     box-shadow: none;
     overflow: hidden;
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
-  `}
+  }
 `
 
 const Item = styled.div`
@@ -149,7 +142,7 @@ const Item = styled.div`
     box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.2);
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
-    background: ${(p) => p.theme.colors.card};
+    background: var(--color-card);
   }
 `
 
@@ -160,61 +153,64 @@ const Title = styled.h3<{ hasOverflow?: boolean; dark?: boolean }>`
   font-size: 22px;
   line-height: 1.4;
   margin-bottom: ${(p) => (p.hasOverflow ? '45px' : '10px')};
-  color: ${(p) => p.theme.colors.primary};
-  font-family: ${(p) => p.theme.fonts.serif};
+  color: var(--color-primary);
+  font-family: var(--font-serif);
   transition: color 0.3s ease-in-out;
   ${limitToTwoLines};
 
-  ${mediaqueries.tablet`
+  ${mediaqueries.tablet} {
     margin-bottom: 15px;
-  `}
-  ${mediaqueries.phablet`
+  }
+  ${mediaqueries.phablet} {
     padding: 30px 20px 0;
     margin-bottom: 10px;
     -webkit-line-clamp: 3;
-  `}
+  }
 `
 
 const Excerpt = styled.p<{
   narrow?: boolean
-  hasOverflow: boolean
 }>`
   ${limitToTwoLines};
   font-size: 16px;
   margin-bottom: 10px;
-  color: ${(p) => p.theme.colors.grey};
-  display: ${(p) => (p.hasOverflow ? 'none' : 'box')};
+  color: var(--color-grey);
+
+  &.hide {
+    display: none;
+  }
+
   max-width: ${(p) => (p.narrow ? '415px' : '515px')};
 
-  ${mediaqueries.desktop`
+  ${mediaqueries.desktop} {
     display: -webkit-box;
-  `}
+  }
 
-  ${mediaqueries.tablet`
+  ${mediaqueries.tablet} {
     margin-bottom: 15px;
-  `}
+  }
 
-  ${mediaqueries.phablet`
+  ${mediaqueries.phablet} {
     max-width: 100%;
-    padding:  0 20px;
+    padding: 0 20px;
     margin-bottom: 20px;
     -webkit-line-clamp: 3;
-  `}
+  }
 `
 
 const MetaData = styled.div`
   font-weight: 600;
   font-size: 16px;
-  color: ${(p) => p.theme.colors.grey};
+  color: var(--color-grey);
   opacity: 0.33;
 
-  ${mediaqueries.phablet`
+  ${mediaqueries.phablet} {
     max-width: 100%;
-    padding:  0 20px 30px;
-  `}
+    padding: 0 20px 30px;
+  }
 `
 
-const ArticleLink = styled(Link)<{ narrow: string }>`
+const ArticleLink = styled(Link)`
   position: relative;
   display: block;
   width: 100%;
@@ -233,7 +229,7 @@ const ArticleLink = styled(Link)<{ narrow: string }>`
 
   &:hover h2,
   &:focus h2 {
-    color: ${(p) => p.theme.colors.accent};
+    color: var(--color-accent);
   }
 
   &[data-a11y='true']:focus::after {
@@ -243,13 +239,17 @@ const ArticleLink = styled(Link)<{ narrow: string }>`
     top: -2%;
     width: 104%;
     height: 104%;
-    border: 3px solid ${(p) => p.theme.colors.accent};
+    border: 3px solid var(--color-accent);
     background: rgba(255, 255, 255, 0.01);
   }
 
-  ${(p) => p.narrow === 'true' && mediaqueries.tablet`display: none;`}
+  &.narrow {
+    ${mediaqueries.tablet} {
+      display: none;
+    }
+  }
 
-  ${mediaqueries.phablet`
+  ${mediaqueries.phablet} {
     &:hover ${ImageContainer} {
       transform: none;
       box-shadow: initial;
@@ -258,5 +258,5 @@ const ArticleLink = styled(Link)<{ narrow: string }>`
     &:active {
       transform: scale(0.97) translateY(3px);
     }
-  `}
+  }
 `

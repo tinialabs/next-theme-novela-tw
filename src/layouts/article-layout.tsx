@@ -1,12 +1,12 @@
 import { useRef, useState, useEffect } from 'react'
 import type * as React from 'react'
-import styled from '@emotion/styled'
+import { styled } from '@linaria/react'
 import throttle from 'lodash/throttle'
 import ArticleBody from '@/theme/components/article-body'
 import Layout from '@/theme/components/layout'
 import Progress from '@/theme/components/progress'
 import Section from '@/theme/components/section'
-import mediaqueries from '@/theme/styles/media'
+import { mediaqueries } from '@/theme/theme-tw'
 import type { SiteProps, IPageContextArticle } from '@/theme/types'
 import { debounce } from '@/theme/utils'
 
@@ -82,7 +82,7 @@ const ArticleLayout: React.FC<{
       </ArticleBody>
       <ArticleFooter pageContext={pageContext} />
       {nextArticles.length > 0 && (
-        <NextArticle narrow>
+        <NextArticle className="narrow">
           <FooterNext>More articles from {name}</FooterNext>
           <ArticlesNext articles={nextArticles} />
           <FooterSpacer />
@@ -100,9 +100,9 @@ const MobileControls = styled.div`
   transition: background 0.2s linear;
   text-align: center;
 
-  ${mediaqueries.tablet_up`
+  ${mediaqueries.tablet_up} {
     display: none;
-  `}
+  }
 `
 
 const NextArticle = styled(Section)`
@@ -114,32 +114,32 @@ const FooterNext = styled.h3`
   opacity: 0.25;
   margin-bottom: 100px;
   font-weight: 400;
-  color: ${(p) => p.theme.colors.primary};
+  color: var(--color-primary);
 
-  ${mediaqueries.tablet`
+  ${mediaqueries.tablet} {
     margin-bottom: 60px;
-  `}
+  }
 
   &::after {
     content: '';
     position: absolute;
-    background: ${(p) => p.theme.colors.grey};
+    background: var(--color-grey);
     width: ${(910 / 1140) * 100}%;
     height: 1px;
     right: 0;
     top: 11px;
 
-    ${mediaqueries.tablet`
+    ${mediaqueries.tablet} {
       width: ${(600 / 1140) * 100}%;
-    `}
+    }
 
-    ${mediaqueries.phablet`
+    ${mediaqueries.phablet} {
       width: ${(400 / 1140) * 100}%;
-    `}
+    }
 
-    ${mediaqueries.phone`
-      width: 90px
-    `}
+    ${mediaqueries.phone} {
+      width: 90px;
+    }
   }
 `
 

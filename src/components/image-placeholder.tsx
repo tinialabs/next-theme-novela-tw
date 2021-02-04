@@ -1,7 +1,7 @@
 import { useRef, useEffect, useState } from 'react'
 import type * as React from 'react'
-import styled from '@emotion/styled'
-import mediaqueries from '@/theme/styles/media'
+import { styled } from '@linaria/react'
+import { mediaqueries } from '@/theme/theme-tw'
 
 const Container = styled.div`
   display: flex;
@@ -14,9 +14,9 @@ const Container = styled.div`
   font-size: 32px;
   font-weight: 600;
 
-  ${mediaqueries.phablet`
+  ${mediaqueries.phablet} {
     font-size: 28px;
-  `}
+  }
 `
 
 const ImagePlaceholder: React.FC<{}> = (props) => {

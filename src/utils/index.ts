@@ -2,7 +2,7 @@
 /* eslint-disable dot-notation */
 import { useEffect, useState } from 'react'
 import throttle from 'lodash/throttle'
-import theme from '@/theme/theme-config'
+import theme from '@/theme/theme-tw'
 
 /**
  * Clamp a number between min and max

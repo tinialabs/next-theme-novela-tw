@@ -1,20 +1,21 @@
 import { useState } from 'react'
 import type * as React from 'react'
 import Highlight, { defaultProps, Language } from 'prism-react-renderer'
-import styled from '@emotion/styled'
+import { styled } from '@linaria/react'
+import { useTheme } from '@/theme/hooks/use-theme'
 import { LiveProvider, LiveEditor, LiveError, LivePreview } from 'react-live'
-import theme from 'prism-react-renderer/themes/oceanicNext'
 import Icons from '@/theme/icons'
-import mediaqueries from '@/theme/styles/media'
+import theme, { mediaqueries } from '@/theme/theme-tw'
 import { copyToClipboard, toKebabCase } from '@/theme/utils'
-import { css } from '@emotion/react'
+
+const { prism } = theme.colors
 
 interface CopyProps {
   toCopy: string
 }
 
-export const PrismCSS = (p) => css`
-  .prism-code {
+export const PrismCSS = `
+  & .prism-code {
     overflow: auto;
     width: 100%;
     max-width: 744px;
@@ -23,15 +24,15 @@ export const PrismCSS = (p) => css`
     font-size: 13px;
     margin: 15px auto 50px;
     border-radius: 5px;
-    font-family: ${p.theme.fonts.monospace};
-    background: ${p.theme.colors.prism.background};
+    font-family: var(--font-monospace);
+    background: var(--color-prism-background);
 
-    .token-line {
+   & .token-line {
       border-left: 3px solid transparent;
 
-      ${Object.keys(p.theme.colors.prism)
+      ${Object.keys(prism)
         .map((key) => {
-          return `.${toKebabCase(key)}{color:${p.theme.colors.prism[key]};}`
+          return `.${toKebabCase(key)}{color:${prism[key]};}`
         })
         .reduce((curr, next) => curr + next, ``)};
 
@@ -39,50 +40,50 @@ export const PrismCSS = (p) => css`
       }
     }
 
-    .number-line {
+    & .number-line {
       display: inline-block;
       width: 32px;
       user-select: none;
       opacity: 0.3;
       color: #dcd9e6;
 
-      ${mediaqueries.tablet`
+      ${mediaqueries.tablet} {
         opacity: 0;
         width: 0;
-      `};
+      }
     }
 
-    .token-line.highlight-line {
+    & .token-line .highlight-line {
       margin: 0 -32px;
       padding: 0 32px;
-      background: ${p.theme.colors.prism.highlight};
-      border-left: 3px solid ${p.theme.colors.prism.highlightBorder};
+      background: var(--color-prism-highlight);
+      border-left: 3px solid var(--color-prism-highlight-border);
 
-      ${mediaqueries.tablet`
+      ${mediaqueries.tablet} {
         margin: 0 -20px;
         padding: 0 20px;
-      `};
+      }
     }
 
-    .operator + .maybe-class-name {
+    & .operator + .maybe-class-name {
       color: #ffcf74 !important;
     }
 
-    .plain ~ .operator {
+    & .plain ~ .operator {
       color: #5fa8aa !important;
     }
 
-    ${mediaqueries.desktop`
+    ${mediaqueries.desktop} {
       left: -26px;
-    `};
+    }
 
-    ${mediaqueries.tablet`
+    ${mediaqueries.tablet} {
       max-width: 526px;
       padding: 20px 20px;
       left: 0;
-    `};
+    }
 
-    ${mediaqueries.phablet`
+    ${mediaqueries.phablet} {
       text-size-adjust: none;
       border-radius: 0;
       margin: 0 auto 25px;
@@ -94,7 +95,7 @@ export const PrismCSS = (p) => css`
       min-width: 100%;
       overflow: initial;
       position: relative;
-    `};
+    }
   }
 `
 
@@ -161,11 +162,16 @@ const CodePrism: React.FC<CodePrismProps> = ({
   ...props
 }) => {
   const shouldHighlightLine = calculateLinesToHighlight(metastring)
+  const theme = useTheme()
 
   if (props.live) {
     return (
       <Container>
-        <LiveProvider code={codeString} noInline={true} theme={theme}>
+        <LiveProvider
+          code={codeString}
+          noInline={true}
+          theme={theme.colors.prism}
+        >
           <LiveEditor style={{ marginBottom: '3px', borderRadius: '2px' }} />
           <LivePreview style={{ fontSize: '18px', borderRadius: '2px' }} />
           <LiveError style={{ color: 'tomato' }} />
@@ -238,14 +244,14 @@ const CopyButton = styled.button`
     top: -2%;
     width: 104%;
     height: 104%;
-    border: 2px solid ${(p) => p.theme.colors.accent};
+    border: 2px solid var(--color-accent);
     border-radius: 5px;
     background: rgba(255, 255, 255, 0.01);
   }
 
-  ${mediaqueries.tablet`
+  ${mediaqueries.tablet} {
     display: none;
-  `}
+  }
 `
 
 const Container = styled.div`
@@ -256,19 +262,19 @@ const Container = styled.div`
   font-size: 13px;
   margin: 15px auto 50px;
   border-radius: 5px;
-  font-family: ${(p) => p.theme.fonts.monospace} !important;
+  font-family: var(--font-monospace) !important;
 
   textarea,
   pre {
     padding: 32px !important;
-    font-family: ${(p) => p.theme.fonts.monospace} !important;
+    font-family: var(--font-monospace) !important;
   }
 
-  ${mediaqueries.desktop`
-      left: -26px;
-    `};
+  ${mediaqueries.desktop} {
+    left: -26px;
+  }
 
-  ${mediaqueries.tablet`
+  ${mediaqueries.tablet} {
     max-width: 526px;
     left: 0;
 
@@ -276,9 +282,9 @@ const Container = styled.div`
     pre {
       padding: 20px !important;
     }
-  `};
+  }
 
-  ${mediaqueries.phablet`
+  ${mediaqueries.phablet} {
     border-radius: 0;
     margin: 0 auto 25px;
     overflow: initial;
@@ -288,5 +294,5 @@ const Container = styled.div`
     min-width: 100%;
     overflow: initial;
     position: relative;
-  `};
+  }
 `

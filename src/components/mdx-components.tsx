@@ -1,5 +1,4 @@
-import * as shortcodes from '@blocks/kit'
-import styled from '@emotion/styled'
+import { styled } from '@linaria/react'
 import {
   Anchor,
   Blockquote,
@@ -37,8 +36,9 @@ export function mdxRender(source: MdxSerializedSource) {
   })
 }
 
+// TO DO add BackgroundGradient, TextGradient, Tweet, Gist, YouTube from @blocks/kit or similar
+
 export const mdxComponents = (id: string) => ({
-  ...shortcodes,
   img: ({ src, alt, ...rest }) =>
     /^http/i.test(src) ? (
       <Image alt={alt} src={src} />

@@ -7,9 +7,9 @@ import {
   memo
 } from 'react'
 import type * as React from 'react'
-import styled from '@emotion/styled'
+import { styled } from '@linaria/react'
 import throttle from 'lodash/throttle'
-import mediaqueries from '@/theme/styles/media'
+import { mediaqueries } from '@/theme/theme-tw'
 import { clamp } from '@/theme/utils'
 import HandleOverlap from './article-handle-overlap'
 
@@ -103,9 +103,9 @@ const AsideContainer = styled.aside`
   margin: 0 auto;
   max-width: 1140px;
 
-  ${mediaqueries.desktop_medium`
+  ${mediaqueries.desktop_medium} {
     display: none;
-  `}
+  }
 `
 
 const Align = memo(styled.div<{

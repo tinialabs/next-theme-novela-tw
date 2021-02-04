@@ -1,11 +1,11 @@
 import { useContext, useEffect } from 'react'
 import type * as React from 'react'
-import styled from '@emotion/styled'
-import { css } from '@emotion/react'
+import { styled } from '@linaria/react'
+import { cx } from '@linaria/core'
 import Link from '@/theme/components/link'
 import Image from '@/theme/components/image'
 import ImagePlaceholder from '@/theme/components/image-placeholder'
-import mediaqueries from '@/theme/styles/media'
+import { mediaqueries } from '@/theme/theme-tw'
 import type { IArticle } from '@/theme/types'
 
 import formatDate from 'date-fns/format'
@@ -62,8 +62,8 @@ const ArticlesList: React.FC<ArticlesListProps> = ({
 
   return (
     <ArticlesListContainer
+      className={cx(alwaysShowAllDetails && 'alwaysShowAllDetails')}
       style={{ opacity: hasSetGridLayout ? 1 : 0 }}
-      alwaysShowAllDetails={alwaysShowAllDetails}
     >
       {articlePairs.map((ap, index) => {
         const isEven = index % 2 !== 0
@@ -110,9 +110,8 @@ const ListItem: React.FC<ArticlesListItemProps> = ({ article, narrow }) => {
             {article.title}
           </Title>
           <Excerpt
+            className={cx(hasOverflow && gridLayout && 'hide')}
             narrow={narrow}
-            hasOverflow={hasOverflow}
-            gridLayout={gridLayout}
           >
             {article.excerpt}
           </Excerpt>
@@ -126,10 +125,7 @@ const ListItem: React.FC<ArticlesListItemProps> = ({ article, narrow }) => {
   )
 }
 
-const wide = '1fr'
-const narrow = '457px'
-
-const limitToTwoLines = css`
+const limitToTwoLines = `
   text-overflow: ellipsis;
   overflow-wrap: normal;
   -webkit-line-clamp: 2;
@@ -138,32 +134,26 @@ const limitToTwoLines = css`
   white-space: normal;
   overflow: hidden;
 
-  ${mediaqueries.phablet`
+  ${mediaqueries.phablet} {
     -webkit-line-clamp: 3;
-  `}
+  }
 `
 
-const showDetails = css`
-  p {
+const ArticlesListContainer = styled.div`
+  transition: opacity 0.25s;
+  p.alwaysShowAllDetails {
     display: -webkit-box;
   }
 
-  h2 {
+  h2.alwaysShowAllDetails {
     margin-bottom: 10px;
   }
 `
 
-const ArticlesListContainer = styled.div<{ alwaysShowAllDetails?: boolean }>`
-  transition: opacity 0.25s;
-  ${(p) => p.alwaysShowAllDetails && showDetails}
-`
-
-const listTile = (p) => css`
+const ListTile = styled.div<{ reverse: boolean }>`
   position: relative;
   display: grid;
-  grid-template-columns: ${p.reverse
-    ? `${narrow} ${wide}`
-    : `${wide} ${narrow}`};
+  grid-template-columns: ${(p) => (p.reverse ? '457px 1fr' : '1fr 457px')};
   grid-template-rows: 2;
   column-gap: 30px;
 
@@ -171,20 +161,20 @@ const listTile = (p) => css`
     margin-bottom: 75px;
   }
 
-  ${mediaqueries.desktop_medium`
+  ${mediaqueries.desktop_medium} {
     grid-template-columns: 1fr 1fr;
-  `}
+  }
 
-  ${mediaqueries.tablet`
+  ${mediaqueries.tablet} {
     grid-template-columns: 1fr;
-    
+
     &:not(:last-child) {
       margin-bottom: 0;
     }
-  `}
+  }
 `
 
-const listItemRow = (p) => css`
+const ListItemRow = styled.div`
   display: grid;
   grid-template-rows: 1fr;
   grid-template-columns: 1fr 488px;
@@ -194,62 +184,68 @@ const listItemRow = (p) => css`
   position: relative;
   margin-bottom: 50px;
 
-  ${mediaqueries.desktop`
+  ${mediaqueries.desktop} {
     grid-column-gap: 24px;
     grid-template-columns: 1fr 380px;
-  `}
-
-  ${mediaqueries.tablet`
-    grid-template-columns: 1fr;
-  `}
-
-  @media (max-width: 540px) {
-    background: ${p.theme.colors.card};
   }
 
-  ${mediaqueries.phablet`
+  ${mediaqueries.tablet} {
+    grid-template-columns: 1fr;
+  }
+
+  @media (max-width: 540px) {
+    background: var(--color-card);
+  }
+
+  ${mediaqueries.phablet} {
     box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.2);
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
-  `}
+  }
 `
 
-const listItemTile = (p) => css`
+const ListItemTile = styled.div`
   position: relative;
 
-  ${mediaqueries.tablet`
+  ${mediaqueries.tablet} {
     margin-bottom: 60px;
-  `}
-
-  @media (max-width: 540px) {
-    background: ${p.theme.colors.card};
   }
 
-  ${mediaqueries.phablet`
+  @media (max-width: 540px) {
+    background: var(--color-card);
+  }
+
+  ${mediaqueries.phablet} {
     margin-bottom: 40px;
     box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.2);
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
-  `}
+  }
 `
 
 // If only 1 article, dont create 2 rows.
-const listRow = (p) => css`
+const ListRow = styled.div<{ hasOnlyOneArticle: boolean }>`
   display: grid;
-  grid-template-rows: ${p.hasOnlyOneArticle ? '1fr' : '1fr 1fr'};
+  grid-template-rows: ${(p) => (p.hasOnlyOneArticle ? '1fr' : '1fr 1fr')};
 `
 
-const List = styled.div<{
+const List: React.FC<{
   reverse: boolean
   gridLayout: string
   hasOnlyOneArticle: boolean
-}>`
-  ${(p) => (p.gridLayout === 'tiles' ? listTile : listRow)}
-`
+}> = ({ reverse, gridLayout, hasOnlyOneArticle, children }) =>
+  gridLayout === 'tiles' ? (
+    <ListTile reverse={reverse}>{children}</ListTile>
+  ) : (
+    <ListRow hasOnlyOneArticle={hasOnlyOneArticle}>{children}</ListRow>
+  )
 
-const Item = styled.div<{ gridLayout: string }>`
-  ${(p) => (p.gridLayout === 'rows' ? listItemRow : listItemTile)}
-`
+const Item: React.FC<{ gridLayout: string }> = ({ gridLayout, children }) =>
+  gridLayout === 'rows' ? (
+    <ListItemRow>{children}</ListItemRow>
+  ) : (
+    <ListItemTile>{children}</ListItemTile>
+  )
 
 const ImageContainer = styled.div<{ narrow: boolean; gridLayout: string }>`
   position: relative;
@@ -264,18 +260,18 @@ const ImageContainer = styled.div<{ narrow: boolean; gridLayout: string }>`
     height: 100%;
   }
 
-  ${mediaqueries.tablet`
+  ${mediaqueries.tablet} {
     height: 200px;
     margin-bottom: 35px;
-  `}
+  }
 
-  ${mediaqueries.phablet`
+  ${mediaqueries.phablet} {
     overflow: hidden;
     margin-bottom: 0;
     box-shadow: none;
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
-  `}
+  }
 `
 
 const Title = styled.h2<{
@@ -284,72 +280,72 @@ const Title = styled.h2<{
   gridLayout?: string
 }>`
   font-weight: bold;
-  color: ${(p) => p.theme.colors.primary};
+  color: var(--color-primary);
   word-break: keep-all;
   line-height: 1.333;
 
   font-size: 21px;
-  font-family: ${(p) => p.theme.fonts.serif};
+  font-family: var(--font-serif);
   margin-bottom: ${(p) =>
     p.hasOverflow && p.gridLayout === 'tiles' ? '35px' : '10px'};
   transition: color 0.3s ease-in-out;
   ${limitToTwoLines};
 
-  ${mediaqueries.desktop`
+  ${mediaqueries.desktop} {
     margin-bottom: 15px;
-  `}
+  }
 
-  ${mediaqueries.tablet`
-    font-size: 24px;  
-  `}
+  ${mediaqueries.tablet} {
+    font-size: 24px;
+  }
 
-  ${mediaqueries.phablet`
-    font-size: 22px;  
+  ${mediaqueries.phablet} {
+    font-size: 22px;
     padding: 30px 20px 0;
     margin-bottom: 10px;
     -webkit-line-clamp: 3;
-  `}
+  }
 `
 
 const Excerpt = styled.p<{
-  hasOverflow: boolean
   narrow: boolean
-  gridLayout: string
 }>`
   ${limitToTwoLines};
   font-size: 16px;
   margin-bottom: 10px;
-  color: ${(p) => p.theme.colors.grey};
-  display: ${(p) =>
-    p.hasOverflow && p.gridLayout === 'tiles' ? 'none' : 'box'};
+  color: var(--color-grey);
   max-width: ${(p) => (p.narrow ? '415px' : '515px')};
 
-  ${mediaqueries.desktop`
+  &.hide {
+    display: none;
+  }
+
+  ${mediaqueries.desktop} {
     display: -webkit-box;
-  `}
+  }
 
-  ${mediaqueries.phablet`
+  ${mediaqueries.phablet} {
     margin-bottom: 15px;
-  `}
+  }
 
-  ${mediaqueries.phablet`
+  ${mediaqueries.phablet} {
     max-width: 100%;
-    padding:  0 20px;
+    padding: 0 20px;
     margin-bottom: 20px;
     -webkit-line-clamp: 3;
-  `}
+  }
 `
 
 const MetaData = styled.div`
   font-weight: 600;
   font-size: 16px;
-  color: ${(p) => p.theme.colors.grey};
+  color: var(--color-grey);
   opacity: 0.33;
 
-  ${mediaqueries.phablet`
+  ${mediaqueries.phablet} {
     max-width: 100%;
-    padding:  0 20px 30px;
-  `}
+    padding: 0 20px 30px;
+  }
 `
 
 const ArticleLink = styled(Link)`
@@ -372,7 +368,7 @@ const ArticleLink = styled(Link)`
 
   &:hover h2,
   &:focus h2 {
-    color: ${(p) => p.theme.colors.accent};
+    color: var(--color-accent);
   }
 
   &[data-a11y='true']:focus::after {
@@ -382,12 +378,12 @@ const ArticleLink = styled(Link)`
     top: -2%;
     width: 103%;
     height: 104%;
-    border: 3px solid ${(p) => p.theme.colors.accent};
+    border: 3px solid var(--color-accent);
     background: rgba(255, 255, 255, 0.01);
     border-radius: 5px;
   }
 
-  ${mediaqueries.phablet`
+  ${mediaqueries.phablet} {
     &:hover ${ImageContainer} {
       transform: none;
       box-shadow: initial;
@@ -396,5 +392,5 @@ const ArticleLink = styled(Link)`
     &:active {
       transform: scale(0.97) translateY(3px);
     }
-  `}
+  }
 `

@@ -1,5 +1,5 @@
 import type * as React from 'react'
-import styled from '@emotion/styled'
+import { styled } from '@linaria/react'
 import { useRouter } from 'next/router'
 import Section from '@/theme/components/section'
 import SEO from '@/theme/components/seo'
@@ -26,7 +26,7 @@ const ArticlesPage: React.FC<{
         description={author.bio}
         siteProps={siteProps}
       />
-      <Section narrow>
+      <Section className="narrow">
         <AuthorHero author={author} />
         <AuthorArticles articles={articles} />
         <AuthorPaginator>
@@ -48,8 +48,8 @@ const AuthorsGradient = styled.div`
   height: 590px;
   z-index: 0;
   pointer-events: none;
-  background: ${(p) => p.theme.colors.gradient};
-  transition: ${(p) => p.theme.colorModeTransition};
+  background: var(--color-gradient);
+  transition: var(--transition-color-mode);
 `
 
 const AuthorPaginator = styled.div`

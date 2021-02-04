@@ -1,5 +1,6 @@
 import type * as React from 'react'
-import styled from '@emotion/styled'
+import { styled } from '@linaria/react'
+import { cx } from '@linaria/core'
 import Section from '@/theme/components/section'
 import SEO from '@/theme/components/seo'
 import Layout from '@/theme/components/layout'
@@ -21,9 +22,9 @@ const ArticlesPage: React.FC<{
     <Layout siteProps={siteProps}>
       <SEO pathname={router.pathname} siteProps={siteProps} />
       <ArticlesHero featuredAuthor={featuredAuthor} siteProps={siteProps} />
-      <Section narrow>
+      <Section className={cx('narrow')}>
         <ArticlesList articles={articles} />
-        <ArticlesPaginator show={pageContext.pageCount > 1}>
+        <ArticlesPaginator className={cx(pageContext.pageCount > 1 && 'show')}>
           <Paginator {...pageContext} />
         </ArticlesPaginator>
       </Section>
@@ -42,10 +43,12 @@ const ArticlesGradient = styled.div`
   height: 590px;
   z-index: 0;
   pointer-events: none;
-  background: ${(p) => p.theme.colors.gradient};
-  transition: ${(p) => p.theme.colorModeTransition};
+  background: var(--color-gradient);
+  transition: var(--transition-color-mode);
 `
 
-const ArticlesPaginator = styled.div<{ show: boolean }>`
-  ${(p) => p.show && `margin-top: 95px;`}
+const ArticlesPaginator = styled.div`
+  &.show {
+    margin-top: 95px;
+  }
 `

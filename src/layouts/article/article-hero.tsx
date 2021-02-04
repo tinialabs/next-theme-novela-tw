@@ -1,8 +1,8 @@
 import type * as React from 'react'
-import styled from '@emotion/styled'
+import { styled } from '@linaria/react'
 import Image from '@/theme/components/image'
 import ImagePlaceholder from '@/theme/components/image-placeholder'
-import mediaqueries from '@/theme/styles/media'
+import { mediaqueries } from '@/theme/theme-tw'
 import type { IArticleDetail } from '@/theme/types'
 import formatDate from 'date-fns/format'
 import ArticleAuthors from './article-authors'
@@ -42,39 +42,39 @@ const ArticleHero: React.FC<ArticleHeroProps> = ({ article }) => {
 export default ArticleHero
 
 const Hero = styled.div`
-  ${(p) => mediaqueries.phablet`
+  ${mediaqueries.phablet} {
     &::before {
-      content: "";
+      content: '';
       width: 100%;
       height: 20px;
-      background: ${p.theme.colors.primary};
+      background: var(--color-primary);
       position: absolute;
       left: 0;
       top: 0;
-      transition: ${p.theme.colorModeTransition};
+      transition: var(--transition-color-mode);
     }
 
     &::after {
-      content: "";
+      content: '';
       width: 100%;
       height: 10px;
-      background: ${p.theme.colors.background};
+      background: var(--color-background);
       position: absolute;
       left: 0;
       top: 10px;
       border-top-left-radius: 25px;
       border-top-right-radius: 25px;
-      transition: ${p.theme.colorModeTransition};
+      transition: var(--transition-color-mode);
     }
-  `}
+  }
 `
 
 const ArticleMeta = styled.div<{ hasCoAUthors: boolean }>`
   margin-left: ${(p) => (p.hasCoAUthors ? '10px' : '0')};
 
-  ${mediaqueries.phablet`
+  ${mediaqueries.phablet} {
     margin-left: 0;
-  `}
+  }
 `
 
 const Header = styled.header`
@@ -84,22 +84,22 @@ const Header = styled.header`
   padding-left: 68px;
   max-width: 749px;
 
-  ${mediaqueries.desktop`
+  ${mediaqueries.desktop} {
     padding-left: 53px;
     max-width: calc(507px + 53px);
     margin: 100px auto 70px;
-  `}
+  }
 
-  ${mediaqueries.tablet`
+  ${mediaqueries.tablet} {
     padding-left: 0;
     margin: 100px auto 70px;
     max-width: 480px;
-  `}
+  }
 
-  ${mediaqueries.phablet`
+  ${mediaqueries.phablet} {
     margin: 170px auto 180px;
     padding: 0 40px;
-  `}
+  }
 
   @media screen and (max-height: 700px) {
     margin: 100px auto;
@@ -108,68 +108,65 @@ const Header = styled.header`
 
 const HeroHeading = styled.h1`
   word-break: keep-all;
-  color: ${(p) => p.theme.colors.primary};
+  color: var(--color-primary);
 
-  ${mediaqueries.desktop`
-  font-size: 38px;
-  line-height: 1.2;
-`};
+  ${mediaqueries.desktop} {
+    font-size: 38px;
+    line-height: 1.2;
+  }
 
-  ${mediaqueries.phablet`
-  font-size: 32px;
-  line-height: 1.3;
-`};
+  ${mediaqueries.phablet} {
+    font-size: 32px;
+    line-height: 1.3;
+  }
 
   font-size: 48px;
-  font-family: ${(p) => p.theme.fonts.serif};
+  font-family: var(--font-serif);
   margin-bottom: 25px;
   font-weight: bold;
   line-height: 1.32;
 
-  ${mediaqueries.tablet`
+  ${mediaqueries.tablet} {
     margin-bottom: 20px;
     font-size: 36px;
-  `}
+  }
 
-  ${mediaqueries.phablet`
+  ${mediaqueries.phablet} {
     font-size: 32px;
-  `}
+  }
 `
 
 const HeroSubtitle = styled.div<{ hasCoAUthors: boolean }>`
   position: relative;
   display: flex;
   font-size: 18px;
-  color: ${(p) => p.theme.colors.grey};
+  color: var(--color-grey);
 
-  ${(p) => mediaqueries.phablet`
+  ${mediaqueries.phablet} {
     font-size: 14px;
     flex-direction: column;
-
-    ${
-      p.hasCoAUthors &&
-      `
-        &::before {
-          content: '';
-          position: absolute;
-          left: -20px;
-          right: -20px;
-          top: -10px;
-          bottom: -10px;
-          border: 1px solid ${p.theme.colors.horizontalRule};
-          opacity: 0.5;
-          border-radius: 5px;
-        }
-    `
-    }
-
-
     strong {
       display: block;
       font-weight: 500;
       margin-bottom: 5px;
     }
-  `}
+  }
+
+  &.hasCoAuthors {
+    ${mediaqueries.phablet} {
+      &::before {
+        content: '';
+        position: absolute;
+        left: -20px;
+        right: -20px;
+        top: -10px;
+        bottom: -10px;
+        border: 1px solid var(--color-horizontal-rule);
+        opacity: 0.5;
+        border-radius: 5px;
+      }
+    }
+  }
 `
 
 const HeroImage = styled.div`
@@ -182,11 +179,11 @@ const HeroImage = styled.div`
   box-shadow: 0 30px 60px -10px rgba(0, 0, 0, 0.2),
     0 18px 36px -18px rgba(0, 0, 0, 0.22);
 
-  ${mediaqueries.tablet`
+  ${mediaqueries.tablet} {
     max-width: 100%;
-  `}
+  }
 
-  ${mediaqueries.phablet`
+  ${mediaqueries.phablet} {
     margin: 0 auto;
     width: calc(100vw - 40px);
     height: 220px;
@@ -194,5 +191,5 @@ const HeroImage = styled.div`
     & > div {
       height: 220px;
     }
-`}
+  }
 `

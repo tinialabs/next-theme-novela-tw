@@ -57,3 +57,5 @@ export interface IPageContextAuthor extends IPaginator {
   pageArticles: IArticle[]
   mailchimp: boolean
 }
+
+export type { Theme, ColorMode } from './theme'

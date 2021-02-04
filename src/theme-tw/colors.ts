@@ -2,7 +2,6 @@ import prism from './prism'
 
 export default {
   prism,
-
   primary: '#000',
   secondary: '#73737D',
   grey: '#73737D',

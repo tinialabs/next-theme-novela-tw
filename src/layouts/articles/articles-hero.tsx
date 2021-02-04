@@ -1,11 +1,12 @@
 import { useContext } from 'react'
 import type * as React from 'react'
-import styled from '@emotion/styled'
+import { styled } from '@linaria/react'
 import Section from '@/theme/components/section'
 import Bio from '@/theme/components/bio'
 import Icons from '@/theme/icons'
-import mediaqueries from '@/theme/styles/media'
+import { mediaqueries } from '@/theme/theme-tw'
 import type { HeroSiteProps, IAuthor } from '@/theme/types'
+import { css } from '@linaria/core'
 import { GridLayoutContext } from './articles-list-context'
 
 const ArticlesHero: React.FC<{
@@ -66,48 +67,49 @@ const SubheadingContainer = styled.div`
   justify-content: space-between;
   margin-bottom: 100px;
 
-  ${mediaqueries.desktop`
+  ${mediaqueries.desktop} {
     margin-bottom: 80px;
-  `};
+  }
 
-  ${mediaqueries.tablet`
+  ${mediaqueries.tablet} {
     margin-bottom: 60px;
-  `};
+  }
 
-  ${mediaqueries.phablet`
+  ${mediaqueries.phablet} {
     display: none;
-  `};
+  }
 `
 
 const GridControlsContainer = styled.div`
   display: flex;
   align-items: center;
 
-  ${mediaqueries.tablet`
+  ${mediaqueries.tablet} {
     display: none;
-  `};
+  }
 `
 
 const HeadingContainer = styled.div`
   margin: 100px 0;
 
-  ${mediaqueries.desktop`
+  ${mediaqueries.desktop} {
     width: 80%;
-  `}
+  }
 
-  ${mediaqueries.tablet`
+  ${mediaqueries.tablet} {
     width: 100%;
-  `}
+  }
 `
 const HeroHeading = (props) => (
   <h1
-    tw={`font-semibold text-3xl md:text-4xl lg:text-5xl ${'not-italic'}`}
-    css={{ lineHeight: '1.15' }}
+    tw="font-semibold text-3xl md:text-4xl lg:text-5xl not-italic"
+    className={css`
+      line-height: 1.15;
+    `}
     {...props}
   />
 )
-/*
-
+/* 
 //   
 
 const HeroHeading3 = (props) => (
@@ -127,19 +129,19 @@ const HeroHeadingOLD = styled.h1`
   font-weight: 600;
   font-size: 52px;
   line-height: 1.15;
-  color: ${(p) => p.theme.colors.primary};
+  color: var(--color-primary);
 
   a {
-    color: ${(p) => p.theme.colors.accent};
+    color: var(--color-accent);
   }
 
-  ${mediaqueries.desktop`
-    font-size: 38px
-  `}
+  ${mediaqueries.desktop} {
+    font-size: 38px;
+  }
 
-  ${mediaqueries.phablet`
+  ${mediaqueries.phablet} {
     font-size: 32px;
-  `}
+  }
 `
 
 const GridButton = styled.button<{ active: boolean }>`
@@ -158,7 +160,7 @@ const GridButton = styled.button<{ active: boolean }>`
   }
 
   &:hover {
-    background: ${(p) => p.theme.colors.hover};
+    background: var(--color-hover);
   }
 
   &[data-a11y='true']:focus::after {
@@ -168,7 +170,7 @@ const GridButton = styled.button<{ active: boolean }>`
     top: -10%;
     width: 120%;
     height: 120%;
-    border: 2px solid ${(p) => p.theme.colors.accent};
+    border: 2px solid var(--color-accent);
     background: rgba(255, 255, 255, 0.01);
     border-radius: 50%;
   }
@@ -178,7 +180,7 @@ const GridButton = styled.button<{ active: boolean }>`
     transition: opacity 0.2s;
 
     path {
-      fill: ${(p) => p.theme.colors.primary};
+      fill: var(--color-primary);
     }
   }
 `

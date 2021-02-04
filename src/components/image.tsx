@@ -1,5 +1,5 @@
 import type * as React from 'react'
-import styled from '@emotion/styled'
+import { styled } from '@linaria/react'
 import type { INovelaImage, SizeHintType } from '@/theme/types'
 import getOptimizedImages from './image-optimizer'
 

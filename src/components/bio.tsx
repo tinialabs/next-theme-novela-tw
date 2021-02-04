@@ -1,5 +1,5 @@
 import type * as React from 'react'
-import styled from '@emotion/styled'
+import { styled } from '@linaria/react'
 import Link from '@/theme/components/link'
 import { RoundedImage } from '@/theme/components/image'
 import type { IAuthor } from '@/theme/types'
@@ -59,7 +59,7 @@ const BioAvatar = styled.div<{ to?: string }>`
     top: -5px;
     width: 50px;
     height: 50px;
-    border: 2px solid ${(p) => p.theme.colors.accent};
+    border: 2px solid var(--color-accent);
   }
 `
 
@@ -76,10 +76,10 @@ const BioText = styled.p`
   max-width: 430px;
   font-size: 14px;
   line-height: 1.45;
-  color: ${(p) => p.theme.colors.grey};
+  color: var(--color-grey);
 
   a {
-    color: ${(p) => p.theme.colors.grey};
+    color: var(--color-grey);
     text-decoration: underline;
   }
 `

@@ -1,6 +1,6 @@
-import styled from '@emotion/styled'
+import { styled } from '@linaria/react'
 import { forwardRef } from 'react'
-import mediaqueries from '@/theme/styles/media'
+import { mediaqueries } from '@/theme/theme-tw'
 import { MDXBodyStyles } from './mdx-components'
 
 const ArticleBodyWrapper = styled.article`
@@ -9,28 +9,27 @@ const ArticleBodyWrapper = styled.article`
   padding-left: 68px;
   transition: background 0.2s linear;
 
-  ${mediaqueries.desktop`
+  ${mediaqueries.desktop} {
     padding-left: 53px;
-  `}
+  }
 
-  ${mediaqueries.tablet`
+  ${mediaqueries.tablet} {
     padding: 70px 0 80px;
-  `}
+  }
 
-  ${mediaqueries.phablet`
+  ${mediaqueries.phablet} {
     padding: 60px 0;
-  `}
+  }
 `
 
-export const ArticleBody = forwardRef<
-  HTMLDivElement,
-  { children: unknown }
->(({ children }, ref) => {
-  return (
-    <ArticleBodyWrapper ref={ref}>
-      <MDXBodyStyles>{children}</MDXBodyStyles>
-    </ArticleBodyWrapper>
-  )
-})
+export const ArticleBody = forwardRef<HTMLDivElement, { children: unknown }>(
+  ({ children }, ref) => {
+    return (
+      <ArticleBodyWrapper ref={ref}>
+        <MDXBodyStyles>{children}</MDXBodyStyles>
+      </ArticleBodyWrapper>
+    )
+  }
+)
 
 export default ArticleBody

@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react'
 import type * as React from 'react'
-import styled from '@emotion/styled'
-import { keyframes } from '@emotion/react'
-import { useColorMode } from 'theme-ui'
+import { styled } from '@linaria/react'
+import { useColorMode } from '@/theme/hooks/use-theme'
 import Icons from '@/theme/icons'
 
 import {
@@ -222,29 +221,6 @@ function generateShare(shareText: string) {
   }
 }
 
-const popUpwards = keyframes`
-  0% {
-    transform:matrix(.97,0,0,1,0,12);
-    opacity:0
-  }
-  20% {
-    transform:matrix(.99,0,0,1,0,2);
-    opacity:.7
-  }
-  40% {
-    transform:matrix(1,0,0,1,0,-1);
-    opacity:1
-  }
-  70% {
-    transform:matrix(1,0,0,1,0,0);
-    opacity:1
-  }
-  100% {
-    transform:matrix(1,0,0,1,0,0);
-    opacity:1
-  }
-`
-
 const MenuFloat = styled.div<{ isDark: boolean }>`
   position: absolute;
   align-items: center;
@@ -252,13 +228,36 @@ const MenuFloat = styled.div<{ isDark: boolean }>`
   width: ${MENU_WIDTH}px;
   height: ${MENU_HEIGHT}px;
   padding: 7px 11px 7px 19px;
-  color: ${(p) => p.theme.colors.grey};
+  color: var(--color-grey);
   background: ${(p) => (p.isDark ? '#fafafa' : '#000')};
   border-radius: 5px;
   font-size: 18px;
   font-weight: 600;
   transition: left 75ms ease-out, right 75ms ease-out, background 200ms;
-  animation: ${popUpwards} 200ms forwards;
+  animation: popupwards 200ms forwards;
+
+  @keyframes popupwards {
+    0% {
+      transform: matrix(0.97, 0, 0, 1, 0, 12);
+      opacity: 0;
+    }
+    20% {
+      transform: matrix(0.99, 0, 0, 1, 0, 2);
+      opacity: 0.7;
+    }
+    40% {
+      transform: matrix(1, 0, 0, 1, 0, -1);
+      opacity: 1;
+    }
+    70% {
+      transform: matrix(1, 0, 0, 1, 0, 0);
+      opacity: 1;
+    }
+    100% {
+      transform: matrix(1, 0, 0, 1, 0, 0);
+      opacity: 1;
+    }
+  }
 
   &::after {
     content: '';

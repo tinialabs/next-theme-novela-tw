@@ -1,14 +1,17 @@
 import { useState } from 'react'
 import type * as React from 'react'
-import styled from '@emotion/styled'
+import { styled } from '@linaria/react'
+import { useTheme } from '@/theme/hooks/use-theme'
 import Section from '@/theme/components/section'
-import mediaqueries from '@/theme/styles/media'
+import { mediaqueries } from '@/theme/theme-tw'
+import { Theme } from '@/theme/types'
 
 const addToMailchimp = async (email: string) => {
   return { result: 'error' }
 }
 
 const Subscription: React.FC<{}> = () => {
+  const theme = useTheme()
   const [email, setEmail] = useState('')
   const [error, setError] = useState('')
   const [subscribed, setSubscribed] = useState(false)
@@ -40,7 +43,7 @@ const Subscription: React.FC<{}> = () => {
   }
 
   return (
-    <Section narrow>
+    <Section className="narrow">
       <SubscriptionContainer>
         <Content>
           <Heading>
@@ -51,8 +54,9 @@ const Subscription: React.FC<{}> = () => {
             opt-out at anytime. We promise to not spam your inbox or share your
             email with any third parties.
           </Text>
-          <Form onSubmit={handleSubmit} hasError={error}>
+          <Form theme={theme} onSubmit={handleSubmit} hasError={error}>
             <Input
+              theme={theme}
               placeholder="your@email.com"
               name="email"
               type="email"
@@ -65,6 +69,7 @@ const Subscription: React.FC<{}> = () => {
               hasError={error}
               subscribed={subscribed}
               disabled={subscribed}
+              theme={theme}
             >
               {subscribed ? <CheckMarkIcon /> : 'Subscribe'}
             </Button>
@@ -84,18 +89,18 @@ const SubscriptionContainer = styled.div`
   flex-direction: column;
   padding: 64px 0 55px;
   margin: 10px auto 100px;
-  background: ${(p) => p.theme.colors.card};
+  background: var(--color-card);
   box-shadow: 0px 4px 50px rgba(0, 0, 0, 0.05);
   z-index: 1;
 
-  ${mediaqueries.tablet`
+  ${mediaqueries.tablet} {
     padding: 50px 0 0;
     text-align: center;
-  `}
+  }
 
-  ${mediaqueries.phablet`
+  ${mediaqueries.phablet} {
     margin: -20px auto 80px;
-  `}
+  }
 `
 
 const Content = styled.div`
@@ -103,17 +108,17 @@ const Content = styled.div`
   width: 100%;
   max-width: 640px;
 
-  ${mediaqueries.tablet`
+  ${mediaqueries.tablet} {
     h3 {
       padding: 0 50px;
     }
-  `}
+  }
 
-  ${mediaqueries.phone`
+  ${mediaqueries.phone} {
     h3 {
       padding: 0 24px;
     }
-  `}
+  }
 `
 
 const Heading = styled.h3`
@@ -121,35 +126,35 @@ const Heading = styled.h3`
   font-size: 24px;
   line-height: 1.45;
   font-weight: bold;
-  color: ${(p) => p.theme.colors.primary};
-  font-family: ${(p) => p.theme.fonts.serif};
+  color: var(--color-primary);
+  font-family: var(--font-serif);
 
-  ${mediaqueries.tablet`
-  font-size: 22px;
-`};
+  ${mediaqueries.tablet} {
+    font-size: 22px;
+  }
 
-  ${mediaqueries.phablet`
-  font-size: 20px;
-`};
+  ${mediaqueries.phablet} {
+    font-size: 20px;
+  }
   margin-bottom: 20px;
 
-  ${mediaqueries.tablet`
+  ${mediaqueries.tablet} {
     margin-bottom: 15px;
-  `}
+  }
 `
 
 const Text = styled.p`
   margin: 0 auto 30px;
-  color: ${(p) => p.theme.colors.grey};
+  color: var(--color-grey);
   line-height: 1.75;
 
-  ${mediaqueries.tablet`
+  ${mediaqueries.tablet} {
     padding: 0 26px;
     margin: 0 auto 25px;
-  `}
+  }
 `
 
-const Form = styled.form<{ hasError: string }>`
+const Form = styled.form<{ hasError: string; theme: Theme }>`
   position: relative;
 
   &::after {
@@ -160,14 +165,14 @@ const Form = styled.form<{ hasError: string }>`
     color: ${(p) =>
       p.hasError ? p.theme.colors.error : p.theme.colors.accent};
 
-    ${mediaqueries.tablet`
-    left: 34px;
-    top: 11px;
-  `}
+    ${mediaqueries.tablet} {
+      left: 34px;
+      top: 11px;
+    }
   }
 `
 
-const Input = styled.input<{ hasError: string }>`
+const Input = styled.input<{ hasError: string; theme: Theme }>`
   position: relative;
   background: ${(p) =>
     p.hasError
@@ -177,32 +182,33 @@ const Input = styled.input<{ hasError: string }>`
   border: none;
   padding: 13px 21px 13px 35px;
   width: 471px;
-  color: ${(p) => p.theme.colors.primary};
+  color: var(--color-primary);
 
   ::placeholder {
-    color: ${(p) => p.theme.colors.track};
+    color: var(--color-track);
     opacity: 1;
   }
 
   :-ms-input-placeholder {
-    color: ${(p) => p.theme.colors.track};
+    color: var(--color-track);
   }
 
   ::-ms-input-placeholder {
-    color: ${(p) => p.theme.colors.track};
+    color: var(--color-track);
   }
 
-  ${mediaqueries.tablet`
+  ${mediaqueries.tablet} {
     width: calc(100% - 36px);
     margin: 0 18px;
     padding: 14px 14px 14px 30px;
     margin-bottom: 30px;
-  `}
+  }
 `
 
 const Button = styled.button<{
   hasError: string
   subscribed: boolean
+  theme: Theme
 }>`
   position: absolute;
   left: 306px;
@@ -225,7 +231,7 @@ const Button = styled.button<{
   &:hover {
     background: ${(p) =>
       p.hasError ? p.theme.colors.error : p.theme.colors.accent};
-    color: ${(p) => p.theme.colors.background};
+    color: var(--color-background);
   }
 
   &[disabled] {
@@ -233,10 +239,10 @@ const Button = styled.button<{
   }
 
   svg * {
-    fill: ${(p) => p.theme.colors.background};
+    fill: var(--color-background);
   }
 
-  ${(p) => mediaqueries.tablet`
+  ${mediaqueries.tablet} {
     position: relative;
     height: 60px;
     width: 100%;
@@ -244,31 +250,31 @@ const Button = styled.button<{
     left: 0;
     border: none;
     border-radius: 0;
-    border-top: 1px solid ${p.theme.colors.horizontalRule};
+    border-top: 1px solid var(--color-horizontal-rule);
 
     &:hover {
       color: initial;
       background: initial;
     }
-  `}
+  }
 `
 
 const Error = styled.div`
   position: absolute;
   left: 35px;
   bottom: -20px;
-  color: ${(p) => p.theme.colors.error};
+  color: var(--color-error);
   font-size: 12px;
 
   a {
-    color: ${(p) => p.theme.colors.error};
+    color: var(--color-error);
     text-decoration: underline;
   }
 
-  ${mediaqueries.tablet`
+  ${mediaqueries.tablet} {
     left: 50px;
     top: 50px;
-  `}
+  }
 `
 
 const CheckMarkIcon = () => (

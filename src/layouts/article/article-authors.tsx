@@ -1,12 +1,12 @@
 import { useState } from 'react'
 import type * as React from 'react'
-import styled from '@emotion/styled'
+import { styled } from '@linaria/react'
 import OutsideClickHandler from 'react-outside-click-handler'
-import { useColorMode } from 'theme-ui'
+import { useColorMode } from '@/theme/hooks/use-theme'
 import Link from '@/theme/components/link'
 import { RoundedImage } from '@/theme/components/image'
 import Icons from '@/theme/icons'
-import mediaqueries from '@/theme/styles/media'
+import { mediaqueries } from '@/theme/theme-tw'
 import type { IAuthor } from '@/theme/types'
 
 /**
@@ -111,16 +111,16 @@ const AuthorAvatar = styled.div`
   width: 25px;
   border-radius: 50%;
   margin-right: 14px;
-  background: ${(p) => p.theme.colors.grey};
+  background: var(--color-grey);
   overflow: hidden;
 
   .gatsby-image-wrapper > div {
     padding-bottom: 100% !important;
   }
 
-  ${mediaqueries.phablet`
+  ${mediaqueries.phablet} {
     display: none;
-  `}
+  }
 `
 
 const AuthorLink = styled.div<{ to?: string }>`
@@ -129,11 +129,11 @@ const AuthorLink = styled.div<{ to?: string }>`
   color: inherit;
 
   strong {
-    transition: ${(p) => p.theme.colorModeTransition};
+    transition: var(--transition-color-mode);
   }
 
   &:hover strong {
-    color: ${(p) => p.theme.colors.primary};
+    color: var(--color-primary);
   }
 `
 
@@ -142,9 +142,9 @@ const CoAuthorsList = styled.div`
   height: 25px;
   margin-right: 15px;
 
-  ${mediaqueries.phablet`
+  ${mediaqueries.phablet} {
     display: none;
-  `}
+  }
 `
 
 const CoAuthorsListOpen = styled.ul`
@@ -154,7 +154,7 @@ const CoAuthorsListOpen = styled.ul`
   right: -21px;
   top: -19px;
   padding: 21px;
-  background: ${(p) => p.theme.colors.card};
+  background: var(--color-card);
   box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
   cursor: pointer;
@@ -177,7 +177,7 @@ const CoAuthorAvatarOpen = styled.div`
   width: 25px;
   border-radius: 50%;
   margin-right: 15px;
-  background: ${(p) => p.theme.colors.grey};
+  background: var(--color-grey);
   overflow: hidden;
   pointer-events: none;
 
@@ -193,8 +193,8 @@ const CoAuthorAvatar = styled.div`
   width: 25px;
   border-radius: 50%;
   z-index: 1;
-  background: ${(p) => p.theme.colors.grey};
-  box-shadow: 0 0 0 2px ${(p) => p.theme.colors.background};
+  background: var(--color-grey);
+  box-shadow: 0 0 0 2px var(--color-background);
   transition: box-shadow 0.25s ease;
   overflow: hidden;
   pointer-events: none;
@@ -204,9 +204,9 @@ const CoAuthorAvatar = styled.div`
     overflow: hidden;
   }
 
-  ${mediaqueries.phablet`
+  ${mediaqueries.phablet} {
     display: none;
-  `}
+  }
 `
 
 const NameContainer = styled.strong`
@@ -218,19 +218,19 @@ const NameContainer = styled.strong`
   font-weight: 600;
   cursor: pointer;
 
-  ${mediaqueries.desktop`
+  ${mediaqueries.desktop} {
     max-width: 120px;
-  `}
+  }
 
-  ${mediaqueries.phablet`
+  ${mediaqueries.phablet} {
     max-width: 200px;
-  `}
+  }
 `
 
 const AuthorNameOpen = styled.strong`
   position: relative;
   cursor: pointer;
-  color: ${(p) => p.theme.colors.secondary};
+  color: var(--color-secondary);
   font-weight: 600;
 `
 
@@ -239,13 +239,13 @@ const IconContainer = styled.div`
   cursor: pointer;
   margin-left: 10px;
 
-  ${mediaqueries.phablet`
+  ${mediaqueries.phablet} {
     position: absolute;
     right: 0;
     bottom: 0;
     top: 10px;
     height: 100%;
-  `}
+  }
 `
 
 const IconOpenContainer = styled.div`
@@ -260,7 +260,7 @@ const CoAuthorsContainer = styled.div<{ isOpen: boolean }>`
   display: flex;
   align-items: center;
   font-size: 18px;
-  color: ${(p) => p.theme.colors.grey};
+  color: var(--color-grey);
   cursor: pointer;
 
   &::before {
@@ -270,7 +270,7 @@ const CoAuthorsContainer = styled.div<{ isOpen: boolean }>`
     right: -20px;
     top: -16px;
     bottom: -16px;
-    background: ${(p) => p.theme.colors.card};
+    background: var(--color-card);
     box-shadow: ${(p) =>
       p.isOpen ? 'none' : ' 0px 0px 15px rgba(0, 0, 0, 0.1)'};
     border-radius: 5px;
@@ -284,7 +284,7 @@ const CoAuthorsContainer = styled.div<{ isOpen: boolean }>`
     opacity: 1;
   }
 
-  ${mediaqueries.phablet`
+  ${mediaqueries.phablet} {
     font-size: 14px;
     align-items: center;
 
@@ -294,17 +294,16 @@ const CoAuthorsContainer = styled.div<{ isOpen: boolean }>`
       background: transparent;
     }
 
-
     strong {
       display: block;
       font-weight: semi-bold;
       margin-bottom: 5px;
     }
-  `}
+  }
 `
 
 const HideOnMobile = styled.span`
-  ${mediaqueries.phablet`
+  ${mediaqueries.phablet} {
     display: none;
-  `}
+  }
 `

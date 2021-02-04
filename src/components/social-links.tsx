@@ -1,7 +1,7 @@
 import type * as React from 'react'
-import styled from '@emotion/styled'
+import { styled } from '@linaria/react'
 import Icons from '@/theme/icons'
-import mediaqueries from '@/theme/styles/media'
+import { mediaqueries } from '@/theme/theme-tw'
 
 interface SocialLinksProps {
   links: {
@@ -94,7 +94,7 @@ const SocialIconContainer = styled.a`
   &:hover {
     svg {
       &:hover * {
-        fill: ${(p) => p.theme.colors.primary};
+        fill: var(--color-primary);
       }
       * {
         transition: fill 0.25s var(--ease-in-out-quad);
@@ -117,14 +117,14 @@ const SocialIconContainer = styled.a`
     top: -20%;
     width: 200%;
     height: 160%;
-    border: 2px solid ${(p) => p.theme.colors.accent};
+    border: 2px solid var(--color-accent);
     background: rgba(255, 255, 255, 0.01);
     border-radius: 5px;
   }
 
-  ${mediaqueries.tablet`
+  ${mediaqueries.tablet} {
     margin: 0 1.375rem;
-  `};
+  }
 `
 
 const Hidden = styled.span`

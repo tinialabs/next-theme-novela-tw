@@ -1,18 +1,19 @@
 import { useEffect } from 'react'
 import type * as React from 'react'
-import { Global } from '@emotion/react'
-import styled from '@emotion/styled'
-import { useColorMode } from 'theme-ui'
-import { globalStyles } from '@/theme/styles'
+import { styled } from '@linaria/react'
+import { cx } from '@linaria/core'
+import { useColorMode } from '@/theme/hooks/use-theme'
 import NavigationHeader from '@/theme/components/navigation-header'
 import NavigationFooter from '@/theme/components/navigation-footer'
 import ArticlesContextProvider from '@/theme/layouts/articles/articles-list-context'
 import { BlogSiteProps, SEOSiteProps } from '@/theme/types'
+import { layoutStyles } from '@/theme/theme-tw'
+import GoogleFonts from '../hooks/google-fonts'
 
 const LayoutContainer = styled.div`
   position: relative;
-  background: ${(p) => p.theme.colors.background};
-  transition: ${(p) => p.theme.colorModeTransition};
+  background: var(--color-background);
+  transition: var(--transition-color-mode);
   min-height: 100vh;
 `
 
@@ -30,8 +31,8 @@ const Layout: React.FC<{
 
   return (
     <ArticlesContextProvider>
-      <LayoutContainer>
-        <Global styles={globalStyles} />
+      <GoogleFonts href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&display=swap" />
+      <LayoutContainer className={cx(layoutStyles)}>
         <NavigationHeader siteProps={siteProps} />
         {children}
         <NavigationFooter siteProps={siteProps} />

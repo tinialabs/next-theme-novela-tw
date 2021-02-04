@@ -1,6 +1,6 @@
 import type * as React from 'react'
-import styled from '@emotion/styled'
-import mediaqueries from '@/theme/styles/media'
+import { styled } from '@linaria/react'
+import { mediaqueries } from '@/theme/theme-tw'
 import type { IArticle } from '@/theme/types'
 import ArticlesList from '@/theme/layouts/articles/articles-list'
 
@@ -21,7 +21,7 @@ export default AuthorArticles
 const AuthorArticlesContainer = styled.div`
   background: linear-gradient(
     180deg,
-    ${(p) => p.theme.colors.card} 0%,
+    var(--color-card) 0%,
     rgba(249, 250, 252, 0) 91.01%
   );
   border-radius: 8px;
@@ -29,12 +29,12 @@ const AuthorArticlesContainer = styled.div`
   position: relative;
   z-index: 1;
 
-  ${mediaqueries.desktop_medium`
+  ${mediaqueries.desktop_medium} {
     padding: 80px;
-  `}
+  }
 
-  ${mediaqueries.desktop`
+  ${mediaqueries.desktop} {
     padding: 0;
     background: transparent;
-  `}
+  }
 `

@@ -1,6 +1,6 @@
 import type * as React from 'react'
-import styled from '@emotion/styled'
-import mediaqueries from '@/theme/styles/media'
+import { styled } from '@linaria/react'
+import { mediaqueries } from '@/theme/theme-tw'
 import type { IAuthor } from '@/theme/types'
 import { RoundedImage } from '@/theme/components/image'
 import SocialLinks from '@/theme/components/social-links'
@@ -48,47 +48,47 @@ const HeroImage = styled.div`
   margin-bottom: 35px;
   border-radius: 50%;
   overflow: hidden;
-  border: 2px solid ${(p) => p.theme.colors.background};
+  border: 2px solid var(--color-background);
   box-shadow: 0px 15.619px 31.2381px rgba(0, 0, 0, 0.15);
 
-  ${mediaqueries.tablet`
+  ${mediaqueries.tablet} {
     width: 146px;
     height: 146px;
-  `}
+  }
 
-  ${mediaqueries.phablet`
+  ${mediaqueries.phablet} {
     width: 136px;
     height: 136px;
     margin-bottom: 25px;
-  `}
+  }
 `
 
 const Heading = styled.h1`
   font-size: 38px;
-  font-family: ${(p) => p.theme.fonts.sansSerif};
-  color: ${(p) => p.theme.colors.primary};
+  font-family: var(--font-sans-serif);
+  color: var(--color-primary);
   margin-bottom: 15px;
   font-weight: 600;
 
-  ${mediaqueries.tablet`
-  `}
+  ${mediaqueries.tablet} {
+  }
 
-  ${mediaqueries.phablet`
-  `}
+  ${mediaqueries.phablet} {
+  }
 `
 
 const Subheading = styled.p`
   margin: 0 auto;
   max-width: 450px;
-  color: ${(p) => p.theme.colors.grey};
+  color: var(--color-grey);
   font-size: 18px;
-  font-family: ${(p) => p.theme.fonts.sansSerif};
+  font-family: var(--font-sans-serif);
   line-height: 1.4;
   text-align: center;
 
-  ${mediaqueries.phablet`
+  ${mediaqueries.phablet} {
     font-size: 14px;
-  `}
+  }
 `
 
 const Social = styled.div`
@@ -96,7 +96,7 @@ const Social = styled.div`
   align-items: center;
   margin-top: 35px;
 
-  ${mediaqueries.phablet`
+  ${mediaqueries.phablet} {
     font-size: 14px;
-  `}
+  }
 `

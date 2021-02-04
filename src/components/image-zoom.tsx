@@ -1,12 +1,12 @@
 import { useCallback, useState } from 'react'
 import type * as React from 'react'
 import { Controlled as ControlledZoom } from 'react-medium-image-zoom'
-import { useThemeUI } from 'theme-ui'
+import { useTheme } from '@/theme/hooks/use-theme'
 import 'react-medium-image-zoom/dist/styles.css'
 
 const ImageZoom: React.FC<{ src: string; alt: string }> = (props) => {
   const [isZoomed, setIsZoomed] = useState(false)
-  const { theme } = useThemeUI()
+  const theme = useTheme()
 
   const image = {
     ...props,

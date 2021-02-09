@@ -1,5 +1,5 @@
 import type * as React from 'react'
-import { styled } from '@linaria/react'
+import { styled } from 'twstyled'
 import Link from '@/theme/components/link'
 import { RoundedImage } from '@/theme/components/image'
 import type { IAuthor } from '@/theme/types'

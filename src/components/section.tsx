@@ -1,4 +1,4 @@
-import { styled } from '@linaria/react'
+import { styled } from 'twstyled'
 import { mediaqueries } from '@/theme/theme-tw'
 
 const Section = styled.section<{ relative?: boolean }>`

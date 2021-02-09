@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/typedef */
 import type * as React from 'react'
-import { styled } from '@linaria/react'
+import { styled } from 'twstyled'
 import { Helmet } from 'react-helmet'
 import { mediaqueries } from '@/theme/theme-tw'
 import { range } from '@/theme/utils'

@@ -1,5 +1,5 @@
 import type * as React from 'react'
-import { styled } from '@linaria/react'
+import { styled } from 'twstyled'
 import { mediaqueries } from '@/theme/theme-tw'
 import CodeBlock from './code'
 
@@ -471,7 +471,7 @@ const OrderedList = styled.ol`
     font-weight: 600;
     position: absolute;
     left: -1.875rem;
-    top: -0.1.875rem
+    top: -0.1.875rem;
     font-size: 1.25rem;
 
     ${mediaqueries.tablet} {

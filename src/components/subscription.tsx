@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import type * as React from 'react'
-import { styled } from '@linaria/react'
+import { styled } from 'twstyled'
 import { useTheme } from '@/theme/hooks/use-theme'
 import Section from '@/theme/components/section'
 import { mediaqueries } from '@/theme/theme-tw'

@@ -1,5 +1,5 @@
 import type * as React from 'react'
-import { styled } from '@linaria/react'
+import { styled } from 'twstyled'
 import Image from '@/theme/components/image'
 import ImagePlaceholder from '@/theme/components/image-placeholder'
 import { mediaqueries } from '@/theme/theme-tw'

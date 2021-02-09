@@ -1,12 +1,11 @@
 import { useContext } from 'react'
 import type * as React from 'react'
-import { styled } from '@linaria/react'
 import Section from '@/theme/components/section'
 import Bio from '@/theme/components/bio'
 import Icons from '@/theme/icons'
 import { mediaqueries } from '@/theme/theme-tw'
 import type { HeroSiteProps, IAuthor } from '@/theme/types'
-import { css } from '@linaria/core'
+import { styled } from 'twstyled'
 import { GridLayoutContext } from './articles-list-context'
 
 const ArticlesHero: React.FC<{
@@ -61,24 +60,30 @@ const ArticlesHero: React.FC<{
 
 export default ArticlesHero
 
-const SubheadingContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 100px;
+declare const div: any
 
-  ${mediaqueries.desktop} {
-    margin-bottom: 80px;
-  }
+const SubheadingContainer = (props) => (
+  <div
+    css={`
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 100px;
 
-  ${mediaqueries.tablet} {
-    margin-bottom: 60px;
-  }
+      ${mediaqueries.desktop} {
+        margin-bottom: 80px;
+      }
 
-  ${mediaqueries.phablet} {
-    display: none;
-  }
-`
+      ${mediaqueries.tablet} {
+        margin-bottom: 60px;
+      }
+
+      ${mediaqueries.phablet} {
+        display: none;
+      }
+    `}
+  />
+)
 
 const GridControlsContainer = styled.div`
   display: flex;
@@ -100,22 +105,24 @@ const HeadingContainer = styled.div`
     width: 100%;
   }
 `
+
 const HeroHeading = (props) => (
   <h1
-    tw="font-semibold text-3xl md:text-4xl lg:text-5xl not-italic"
-    className={css`
+    tw="bg-blue-100 font-semibold text-3xl md:text-4xl lg:text-5xl not-italic"
+    css={`
       line-height: 1.15;
     `}
     {...props}
   />
 )
+
 /* 
 //   
 
 const HeroHeading3 = (props) => (
   
   <h1
-    className={xw`bg-blue-500 font-semibold text-3xl md:text-4xl lg:text-5xl not-italic ${css(
+    className={tw`bg-blue-500 font-semibold text-3xl md:text-4xl lg:text-5xl not-italic ${css(
       {
         lineHeight: '1.15'
       }
@@ -124,7 +131,18 @@ const HeroHeading3 = (props) => (
   />
 )*/
 
-const HeroHeadingOLD = styled.h1`
+const HeroHeading5 = styled.h1<any>`
+  @tailwind text-2xl md:text-4xl lg:text-4xl ${(props) =>
+    props.test
+      ? 'not-italic font-bold text-red-500'
+      : 'font-semibold text-blue-500'};
+  line-height: ${(props) => (props.test ? '1.14' : '1.16')};
+`
+
+const HeroHeadingOLDER = styled.h1`
+  @tailwind {
+    bg-blue-600 font-semibold text-3xl md:text-4xl lg:text-5xl not-italic
+  }
   font-style: normal;
   font-weight: 600;
   font-size: 52px;

@@ -1,5 +1,5 @@
 import merge from 'lodash/merge'
-import { css } from '@linaria/core'
+import { css } from 'twstyled'
 import colors from './colors'
 import tags from './tags'
 

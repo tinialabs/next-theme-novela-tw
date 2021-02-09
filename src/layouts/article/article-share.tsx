@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import type * as React from 'react'
-import { styled } from '@linaria/react'
+import { styled } from 'twstyled'
 import { useColorMode } from '@/theme/hooks/use-theme'
 import Icons from '@/theme/icons'
 

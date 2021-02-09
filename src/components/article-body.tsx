@@ -1,4 +1,4 @@
-import { styled } from '@linaria/react'
+import { styled } from 'twstyled'
 import { forwardRef } from 'react'
 import { mediaqueries } from '@/theme/theme-tw'
 import { MDXBodyStyles } from './mdx-components'

@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import type * as React from 'react'
-import { styled } from '@linaria/react'
-import { cx } from '@linaria/core'
+import { styled, cx } from 'twstyled'
+
 import { useColorMode } from '@/theme/hooks/use-theme'
 import NavigationHeader from '@/theme/components/navigation-header'
 import NavigationFooter from '@/theme/components/navigation-footer'

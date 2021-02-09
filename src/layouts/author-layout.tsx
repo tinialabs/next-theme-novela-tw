@@ -1,5 +1,5 @@
 import type * as React from 'react'
-import { styled } from '@linaria/react'
+import { styled } from 'twstyled'
 import { useRouter } from 'next/router'
 import Section from '@/theme/components/section'
 import SEO from '@/theme/components/seo'

@@ -1,8 +1,8 @@
-import { styled } from '@linaria/react'
 import { mediaqueries } from '@/theme/theme-tw'
 import type { Icon } from '@/theme/types'
 import LogoDesktop from '@/content/theme/logo.inline.svg'
 import LogoMobile from '@/content/theme/logo.mobile.inline.svg'
+import { css } from 'twstyled'
 
 const Logo: Icon = ({ fill = 'white' }) => {
   return (
@@ -15,18 +15,23 @@ const Logo: Icon = ({ fill = 'white' }) => {
 
 export default Logo
 
-const LogoContainer = styled.div`
-  .Logo__Mobile {
-    display: none;
-  }
+const LogoContainer = (props) => (
+  <div
+    {...props}
+    className={css`
+      .Logo__Mobile {
+        display: none;
+      }
 
-  ${mediaqueries.tablet} {
-    .Logo__Desktop {
-      display: none;
-    }
+      ${mediaqueries.tablet} {
+        .Logo__Desktop {
+          display: none;
+        }
 
-    .Logo__Mobile {
-      display: block;
-    }
-  }
-`
+        .Logo__Mobile {
+          display: block;
+        }
+      }
+    `}
+  />
+)

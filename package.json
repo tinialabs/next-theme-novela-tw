@@ -19,12 +19,9 @@
     "clean": "rm -rf .next && rm -rf  out && rm -rf public && ln -s ../public public"
   },
   "dependencies": {
-    "@blocks/kit": "^0.0.28",
-    "next-linaria-babel": "^3.0.2",
-    "@linaria/webpack5-loader": "^3.0.0-beta.1",
-    "@linaria/core": "^3.0.0-beta.1",
-    "@linaria/react": "^3.0.0-beta.1",
-    "@linaria/shaker": "^3.0.0-beta.1",
+    "twstyled": "^3.0.5",
+    "@twstyled/next": "^3.0.5",
+    "@twstyled/babel-preset": "^3.0.5",
     "@ngsctt/remark-smartypants": "^0.2.0",
     "@types/jest": "^26.0.20",
     "@types/node": "^14.14.20",
@@ -52,11 +49,9 @@
     "remark-oembed": "^1.2.1",
     "remark-slug": "^6.0.0",
     "@tailwindcss/typography": "^0.4.0",
-    "tailwindcss": "^2.0.2",
-    "twstyled": "^2.0.2"
+    "tailwindcss": "^2.0.2"
   },
-  "devDependencies": {
-  },
+  "devDependencies": {},
   "peerDependencies": {
     "react": "^17",
     "next": "latest",

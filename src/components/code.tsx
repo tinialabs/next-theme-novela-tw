@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import type * as React from 'react'
 import Highlight, { defaultProps, Language } from 'prism-react-renderer'
-import { styled } from '@linaria/react'
+import { styled } from 'twstyled'
 import { useTheme } from '@/theme/hooks/use-theme'
 import { LiveProvider, LiveEditor, LiveError, LivePreview } from 'react-live'
 import Icons from '@/theme/icons'

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import * as React from 'react'
-import { styled } from '@linaria/react'
+import { styled } from 'twstyled'
 import throttle from 'lodash/throttle'
 
 /**

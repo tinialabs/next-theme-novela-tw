@@ -1,6 +1,6 @@
 import type * as React from 'react'
-import { styled } from '@linaria/react'
-import { cx } from '@linaria/core'
+import { styled, cx } from 'twstyled'
+
 import { mediaqueries } from '@/theme/theme-tw'
 import Section from '@/theme/components/section'
 import SocialLinks from '@/theme/components/social-links'

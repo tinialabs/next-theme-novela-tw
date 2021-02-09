@@ -7,7 +7,7 @@ import {
   memo
 } from 'react'
 import type * as React from 'react'
-import { styled } from '@linaria/react'
+import { styled } from 'twstyled'
 import throttle from 'lodash/throttle'
 import { mediaqueries } from '@/theme/theme-tw'
 import { clamp } from '@/theme/utils'

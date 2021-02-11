@@ -19,9 +19,9 @@
     "clean": "rm -rf .next && rm -rf  out && rm -rf public && ln -s ../public public"
   },
   "dependencies": {
-    "twstyled": "^3.0.5",
-    "@twstyled/next": "^3.0.5",
-    "@twstyled/babel-preset": "^3.0.5",
+    "@twstyled/core": "^3.1.3",
+    "@twstyled/next": "^3.1.4",
+    "@twstyled/babel-preset": "^3.1.3",
     "@ngsctt/remark-smartypants": "^0.2.0",
     "@types/jest": "^26.0.20",
     "@types/node": "^14.14.20",
@@ -38,7 +38,6 @@
     "next-sitemap": "^1.4.5",
     "nprogress": "^0.2.0",
     "prism-react-renderer": "^1.1.1",
-    "react-helmet": "^6.1.0",
     "react-live": "^2.2.3",
     "react-medium-image-zoom": "^4.3.1",
     "react-outside-click-handler": "^1.3.0",

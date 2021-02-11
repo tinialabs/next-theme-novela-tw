@@ -104,6 +104,14 @@
     background: transparent;
   }
 
+  button:focus {
+    outline: none;
+  }
+
+  fieldset:focus {
+    outline: none;
+  }
+
   table {
     border-collapse: separate;
     border-spacing: 0;

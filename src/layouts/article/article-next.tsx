@@ -1,5 +1,5 @@
 import type * as React from 'react'
-import { styled, cx } from 'twstyled'
+import { styled, cx } from '@twstyled/core'
 
 import Link from '@/theme/components/link'
 import Image from '@/theme/components/image'

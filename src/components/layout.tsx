@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import type * as React from 'react'
-import { styled, cx } from 'twstyled'
+import { styled, cx } from '@twstyled/core'
 
 import { useColorMode } from '@/theme/hooks/use-theme'
 import NavigationHeader from '@/theme/components/navigation-header'

@@ -1,4 +1,4 @@
-import { styled } from 'twstyled'
+import { styled } from '@twstyled/core'
 import {
   Anchor,
   Blockquote,
@@ -80,11 +80,7 @@ export const mdxComponents = (id: string) => ({
  * the MDXBodyStyles.
  */
 export const MDXBodyStyles = styled.div`
-  position: relative;
-  z-index: 10;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
+  @tailwind flex flex-col justify-center relative z-10;
 
   ${HeadingsCSS}
   ${PrismCSS}

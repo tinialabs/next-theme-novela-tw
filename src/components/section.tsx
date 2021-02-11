@@ -1,4 +1,4 @@
-import { styled } from 'twstyled'
+import { styled } from '@twstyled/core'
 import { mediaqueries } from '@/theme/theme-tw'
 
 const Section = styled.section<{ relative?: boolean }>`

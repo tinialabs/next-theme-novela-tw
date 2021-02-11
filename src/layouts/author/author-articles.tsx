@@ -1,5 +1,5 @@
 import type * as React from 'react'
-import { styled } from 'twstyled'
+import { styled } from '@twstyled/core'
 import { mediaqueries } from '@/theme/theme-tw'
 import type { IArticle } from '@/theme/types'
 import ArticlesList from '@/theme/layouts/articles/articles-list'

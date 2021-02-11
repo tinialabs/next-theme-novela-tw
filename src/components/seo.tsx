@@ -1,16 +1,13 @@
 import type * as React from 'react'
-import Helmet from 'react-helmet'
 import type { SEOSiteProps, ISocial } from '@/theme/types'
+import Head from 'next/head'
 
 /**
- * This react helmt code is adapted from
+ * This Next.js header code is adapted from
  * https://themeteorchef.com/tutorials/reusable-seo-with-react-helmet.
  *
- * A great tutorial explaining how to setup a robust version of an
- * SEO friendly react-helmet instance.
  *
- *
- * Use the Helmt on pages to generate SEO and meta content!
+ * Use the SEO component on pages to generate SEO and meta content!
  *
  * Usage:
  * <SEO
@@ -47,10 +44,9 @@ interface HelmetProps {
 
 const EMPTY_SOCIAL = {} as ISocial
 
-const themeUIDarkModeWorkaroundScript = [
-  {
-    type: 'text/javascript',
-    innerHTML: `
+const themeUIDarkModeWorkaroundScript = {
+  type: 'text/javascript',
+  innerHTML: `
     (function() {
       try {
         var mode = localStorage.getItem('theme-tw-color-mode');
@@ -60,8 +56,7 @@ const themeUIDarkModeWorkaroundScript = [
       } catch (e) {}
     })();
   `
-  }
-]
+}
 
 const SEO: React.FC<HelmetProps & { siteProps: SEOSiteProps }> = ({
   articlepathName,
@@ -387,16 +382,20 @@ const SEO: React.FC<HelmetProps & { siteProps: SEOSiteProps }> = ({
   }
 
   return (
-    <Helmet
-      title={title || siteProps.title}
-      htmlAttributes={{ lang: 'en' }}
-      script={themeUIDarkModeWorkaroundScript}
-      meta={metaTags}
-    >
-      <script type="application/ld+json">{schema}</script>
-      {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
-      {children}
-    </Helmet>
+    <>
+      <Head>
+        <title>{title || siteProps.title}</title>
+        <script type="application/ld+json">{schema}</script>
+        {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
+        {children}
+        {metaTags.map((meta, index) => (
+          <meta key={index} {...meta} />
+        ))}
+        <script type={themeUIDarkModeWorkaroundScript.type}>
+          {themeUIDarkModeWorkaroundScript.innerHTML}
+        </script>
+      </Head>
+    </>
   )
 }
 

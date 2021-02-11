@@ -1,5 +1,5 @@
 import type * as React from 'react'
-import { styled } from 'twstyled'
+import { styled } from '@twstyled/core'
 import type { INovelaImage, SizeHintType } from '@/theme/types'
 import getOptimizedImages from './image-optimizer'
 

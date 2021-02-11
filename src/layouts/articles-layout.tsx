@@ -1,5 +1,5 @@
 import type * as React from 'react'
-import { styled, cx } from 'twstyled'
+import { styled, cx } from '@twstyled/core'
 
 import Section from '@/theme/components/section'
 import SEO from '@/theme/components/seo'

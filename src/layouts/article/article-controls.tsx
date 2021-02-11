@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import type * as React from 'react'
-import { styled } from 'twstyled'
+import { styled } from '@twstyled/core'
 import { useColorMode } from '@/theme/hooks/use-theme'
 import { mediaqueries } from '@/theme/theme-tw'
 import { copyToClipboard } from '@/theme/utils'

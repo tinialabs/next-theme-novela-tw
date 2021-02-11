@@ -1,5 +1,5 @@
 import type * as React from 'react'
-import { styled, cx } from 'twstyled'
+import { styled, cx } from '@twstyled/core'
 
 import { mediaqueries } from '@/theme/theme-tw'
 import Section from '@/theme/components/section'
@@ -50,8 +50,7 @@ const FooterContainer = styled.div`
 `
 
 const HoritzontalRule = styled.div`
-  position: relative;
-  margin: 140px auto 50px;
+  @tailwind mx-auto mb-12 mt-32 relative;
   border-bottom: 1px solid var(--color-horizontal-rule);
 
   ${mediaqueries.tablet} {
@@ -74,13 +73,8 @@ const FooterText = styled.div`
 `
 
 const FooterGradient = styled.div`
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
+  @tailwind pointer-events-none absolute bottom-0 left-0 w-full z-0;
   height: 590px;
-  z-index: 0;
-  pointer-events: none;
   background: var(--color-gradient);
   transition: var(--transition-color-mode);
 `

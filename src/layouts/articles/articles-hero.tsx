@@ -5,7 +5,7 @@ import Bio from '@/theme/components/bio'
 import Icons from '@/theme/icons'
 import { mediaqueries } from '@/theme/theme-tw'
 import type { HeroSiteProps, IAuthor } from '@/theme/types'
-import { styled } from 'twstyled'
+import { css, styled } from '@twstyled/core'
 import { GridLayoutContext } from './articles-list-context'
 
 const ArticlesHero: React.FC<{
@@ -62,9 +62,7 @@ export default ArticlesHero
 
 declare const div: any
 
-const SubheadingContainer = (props) => (
-  <div
-    css={`
+const SubheadingContainer = styled.div`
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -81,9 +79,7 @@ const SubheadingContainer = (props) => (
       ${mediaqueries.phablet} {
         display: none;
       }
-    `}
-  />
-)
+    `
 
 const GridControlsContainer = styled.div`
   display: flex;
@@ -106,43 +102,7 @@ const HeadingContainer = styled.div`
   }
 `
 
-const HeroHeading = (props) => (
-  <h1
-    tw="bg-blue-100 font-semibold text-3xl md:text-4xl lg:text-5xl not-italic"
-    css={`
-      line-height: 1.15;
-    `}
-    {...props}
-  />
-)
-
-/* 
-//   
-
-const HeroHeading3 = (props) => (
-  
-  <h1
-    className={tw`bg-blue-500 font-semibold text-3xl md:text-4xl lg:text-5xl not-italic ${css(
-      {
-        lineHeight: '1.15'
-      }
-    )}`}
-    {...props}
-  />
-)*/
-
-const HeroHeading5 = styled.h1<any>`
-  @tailwind text-2xl md:text-4xl lg:text-4xl ${(props) =>
-    props.test
-      ? 'not-italic font-bold text-red-500'
-      : 'font-semibold text-blue-500'};
-  line-height: ${(props) => (props.test ? '1.14' : '1.16')};
-`
-
-const HeroHeadingOLDER = styled.h1`
-  @tailwind {
-    bg-blue-600 font-semibold text-3xl md:text-4xl lg:text-5xl not-italic
-  }
+const HeroHeading = styled.h1`
   font-style: normal;
   font-weight: 600;
   font-size: 52px;

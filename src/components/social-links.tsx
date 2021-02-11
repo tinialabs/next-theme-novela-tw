@@ -1,5 +1,5 @@
 import type * as React from 'react'
-import { styled } from 'twstyled'
+import { styled } from '@twstyled/core'
 import Icons from '@/theme/icons'
 import { mediaqueries } from '@/theme/theme-tw'
 

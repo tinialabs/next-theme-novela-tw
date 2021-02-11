@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/typedef */
 import type * as React from 'react'
-import { styled } from 'twstyled'
-import { Helmet } from 'react-helmet'
+import { styled } from '@twstyled/core'
+import Head from 'next/head'
 import { mediaqueries } from '@/theme/theme-tw'
 import { range } from '@/theme/utils'
 import type { IPaginator } from '@/theme/types'
@@ -123,10 +123,10 @@ const Paginator: React.FC<IPaginator & { maxPages?: number }> = ({
 
   return (
     <>
-      <Helmet>
+      <Head>
         {hasPrevious && <link rel="prev" href={previousPath} />}
         {hasNext && <link rel="next" href={nextPath} />}
-      </Helmet>
+      </Head>
       <Frame>
         {hasPrevious && <PageButton to={previousPath}>Prev</PageButton>}
         {getPageLinks({ pageRoot, current, count, maxPages })}

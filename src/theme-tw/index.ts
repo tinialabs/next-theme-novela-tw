@@ -1,5 +1,5 @@
 import merge from 'lodash/merge'
-import { css } from 'twstyled'
+import { css } from '@twstyled/core'
 import colors from './colors'
 import tags from './tags'
 

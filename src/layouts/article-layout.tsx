@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from 'react'
 import type * as React from 'react'
-import { styled } from 'twstyled'
+import { styled } from '@twstyled/core'
 import throttle from 'lodash/throttle'
 import ArticleBody from '@/theme/components/article-body'
 import Layout from '@/theme/components/layout'
